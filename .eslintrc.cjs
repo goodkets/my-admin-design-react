@@ -7,7 +7,7 @@ module.exports = {
       "eslint:recommended",
       "plugin:react/recommended",
       "plugin:@typescript-eslint/recommended",
-+      "plugin:prettier/recommended",
+      "plugin:prettier/recommended",
       'plugin:react/jsx-runtime'
   ],
   "parser": "@typescript-eslint/parser",
@@ -21,12 +21,12 @@ module.exports = {
   "plugins": [
       "react",
       "@typescript-eslint",
-+      "prettier"
+      "prettier"
   ],
   "rules": {
-+       "prettier/prettier": "error",
-+       "arrow-body-style": "off",
-+       "prefer-arrow-callback": "off"
+       "prettier/prettier": "error",
+       "arrow-body-style": "off",
+       "prefer-arrow-callback": "off"
   },
   "settings": {
     "react": {
