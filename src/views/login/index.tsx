@@ -3,11 +3,24 @@ import loginIcon from "@/assets/images/logo_name.png";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
+import { reqLogin } from "@/api/user";
+import { asyncFunc } from "../../utils/asyncFunc";
+import { message } from "antd";
 const UserLogin = () => {
   const [loading, setLoading] = useState(false);
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     setLoading(true);
-    console.log("Received values of form: ", values);
+    asyncFunc(async () => {
+      const res = await reqLogin({
+        username: values.username,
+        password: values.password,
+      });
+      console.log(res);
+      // if (res.code !== 200) {
+      setLoading(false);
+      //   return;
+      // }
+    }, 1000);
   };
   return (
     <div className={styles["login-wrapper"]}>
