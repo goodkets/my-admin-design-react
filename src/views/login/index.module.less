@@ -1,0 +1,44 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('@/assets/images/login-background.jpg');
+    .login-content {
+            padding: 16px 30px 10px;
+        background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 1, .1);
+    &-title {
+              margin: 0 auto 35px;
+      text-align: center;
+      color: #707070;
+      font-size: 18px;
+      letter-spacing: 2px;
+            img {
+        width: 216px;
+        height: 82px;
+        margin: 12px auto 0;
+      }
+    }
+    &-form {
+        width: 320px;
+      }
+      &-control {
+        display: flex;
+        justify-content: space-between;
+        color: red;
+      }
+  
+      &-btn {
+        width: 100%;
+        // color: red;
+      }
+  
+      .no-margin {
+        margin-bottom: 0;
+        color: #000;
+      }
+    }
+}

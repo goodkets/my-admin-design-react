@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import { reqLogin } from "@/api";
+import UserLogin from "./views/login";
 const App: React.FC = () => {
   const getLogin = async () => {
     const res = await reqLogin({
@@ -11,13 +12,7 @@ const App: React.FC = () => {
   };
   return (
     <div>
-      <Button
-        onClick={() => {
-          getLogin();
-        }}
-      >
-        Hello Vite + React!
-      </Button>
+      <UserLogin />
     </div>
   );
 };
