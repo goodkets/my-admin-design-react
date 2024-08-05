@@ -6,33 +6,50 @@ import { useState } from "react";
 import { reqLogin } from "@/api/user";
 import { asyncFunc } from "../../utils/asyncFunc";
 import { message } from "antd";
-const UserLogin = () => {
+import React from "react";
+import { setToken } from "../../utils/storeages";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserToken } from "../../store/user";
+const UserLogin: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const count = useSelector((state) => state.userSlice.value);
+  const dispatch = useDispatch();
   const onFinish = async (values: any) => {
-    setLoading(true);
-    asyncFunc(async () => {
-      const res = await reqLogin({
-        username: values.username,
-        password: values.password,
-      });
-      console.log(res);
-      // if (res.code !== 200) {
+    try {
+      setLoading(true);
+      asyncFunc(async () => {
+        const res = await reqLogin({
+          username: values.username,
+          password: values.password,
+        });
+        console.log(res);
+        if (res.token) {
+          setLoading(false);
+          dispatch(setUserToken(res.token));
+          // setToken("token", res.token);
+          message.success("登录成功");
+        }
+      }, 2000);
+    } catch (error) {
       setLoading(false);
-      //   return;
-      // }
-    }, 1000);
+      message.error("登录失败");
+    }
   };
   return (
     <div className={styles["login-wrapper"]}>
       <div className={styles["login-content"]}>
         <div className={styles["login-content-title"]}>
           <img src={loginIcon} alt="" />
-          <h3>账号登录</h3>
+          <h3>账号登录{count}</h3>
         </div>
         <Form
           name="normal_login"
           className={styles["login-content-form"]}
-          initialValues={{ remember: true }}
+          initialValues={{
+            username: "admin",
+            password: "111111",
+            remember: true,
+          }}
           onFinish={onFinish}
         >
           <Form.Item
