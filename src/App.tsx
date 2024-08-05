@@ -1,11 +1,8 @@
 import React from "react";
-import UserLogin from "./views/login";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 const App: React.FC = () => {
-  return (
-    <div>
-      <UserLogin />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

@@ -24,7 +24,7 @@ const handleError = (error: AxiosError) => {
 };
 //请求拦截
 request.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const token = getToken('token');
+  const token = getToken("token");
   if (token) {
     config.headers["Authorization"] = `${token}`;
   }

@@ -1,24 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit'
-import {getToken,setToken,removeToken} from "@/utils/storeages"
+import { createSlice } from "@reduxjs/toolkit";
+import { getToken, setToken, removeToken } from "@/utils/storeages";
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
-    userInfo:{
-        name:'',
-        role:''
+    userInfo: {
+      name: "",
+      role: "",
     },
-    token:getToken('token'),
+    token: getToken("token"),
   },
   reducers: {
-    setUserToken:(state,action)=>{
-        console.log(state,action)
-        setToken(state.token,action.payload)
+    setUserToken: (state, action) => {
+      state.token = action.payload;
+      setToken("token", action.payload);
     },
-    removeUserToken:(state,action)=>{
-        removeToken(state.token)
-    }
-  }
-})
-export const { setUserToken,removeUserToken } = userSlice.actions
+    removeUserToken: (state, action) => {
+      state.token = "";
+      removeToken(action.payload);
+    },
+  },
+});
+export const { setUserToken, removeUserToken } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

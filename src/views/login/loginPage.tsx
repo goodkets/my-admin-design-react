@@ -7,13 +7,13 @@ import { reqLogin } from "@/api/user";
 import { asyncFunc } from "../../utils/asyncFunc";
 import { message } from "antd";
 import React from "react";
-import { setToken } from "../../utils/storeages";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { setUserToken } from "../../store/user";
+import { useNavigate } from "react-router-dom";
 const UserLogin: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const count = useSelector((state) => state.userSlice.value);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onFinish = async (values: any) => {
     try {
       setLoading(true);
@@ -26,8 +26,9 @@ const UserLogin: React.FC = () => {
         if (res.token) {
           setLoading(false);
           dispatch(setUserToken(res.token));
-          // setToken("token", res.token);
           message.success("登录成功");
+          navigate("/");
+
         }
       }, 2000);
     } catch (error) {
@@ -40,7 +41,7 @@ const UserLogin: React.FC = () => {
       <div className={styles["login-content"]}>
         <div className={styles["login-content-title"]}>
           <img src={loginIcon} alt="" />
-          <h3>账号登录{count}</h3>
+          <h3>账号登录</h3>
         </div>
         <Form
           name="normal_login"

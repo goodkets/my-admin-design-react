@@ -2,8 +2,8 @@
 export const asyncFunc = (fn: () => void, time: number) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      fn()
-      resolve(true)
-    }, time)
-  })
-}
+      fn();
+      resolve(true);
+    }, time);
+  });
+};
