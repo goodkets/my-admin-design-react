@@ -7,7 +7,7 @@ import { reqLogin } from "@/api/user";
 import { asyncFunc } from "../../utils/asyncFunc";
 import { message } from "antd";
 import React from "react";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserToken } from "../../store/user";
 import { useNavigate } from "react-router-dom";
 const UserLogin: React.FC = () => {
@@ -28,7 +28,6 @@ const UserLogin: React.FC = () => {
           dispatch(setUserToken(res.token));
           message.success("登录成功");
           navigate("/");
-
         }
       }, 2000);
     } catch (error) {
