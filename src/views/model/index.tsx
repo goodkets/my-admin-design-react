@@ -12,12 +12,12 @@ const HomePage: React.FC = () => {
       {/* 侧边栏 */}
       <SiderPage />
       <Layout>
-        {/* 头部 */ }
+        {/* 头部 */}
         <HeaderPage />
-        {/* 主体 */ }
+        {/* 主体 */}
         <MainPage />
-        {/* 底部 */ }
-        <Footer style={{ textAlign: 'center' }}>
+        {/* 底部 */}
+        <Footer style={{ textAlign: "center" }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>

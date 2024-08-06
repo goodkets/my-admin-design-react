@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import loginName from "@/assets/images/logo.png";
 import nameWhite from "@/assets/images/name_white.png";
 import "./index.less";
-
+import { useSelector } from "react-redux";
 type MenuItem = Required<MenuProps>["items"][number];
 function getItem(
   label: React.ReactNode,
@@ -43,8 +43,8 @@ const items: MenuItem[] = [
   // getItem("Files", "9", <FileOutlined />),
 ];
 const SiderPage: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const { menuStatus } = useSelector((state) => state.settingSlice);
   const clickSide = (e) => {
     console.log(e);
     if (e.key === "Dashboard") {
@@ -55,15 +55,13 @@ const SiderPage: React.FC = () => {
   };
   return (
     <>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
-      >
+      <Sider collapsed={menuStatus}>
         <div className="demo-logo-vertical" />
-        <div className="logo" >
-          <img src={loginName} alt="" className="logo-img"/>
-          <img src={nameWhite} alt="" className="logo-img-white"/>
+        <div className="logo">
+          <img src={loginName} alt="" className="logo-img" />
+          {!menuStatus ? (
+            <img src={nameWhite} alt="" className="logo-img-white" />
+          ) : null}
         </div>
         <Menu
           theme="dark"

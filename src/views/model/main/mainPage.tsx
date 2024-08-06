@@ -19,7 +19,7 @@ const MainPage: React.FC = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-        <Outlet />
+          <Outlet />
         </div>
       </Content>
     </>
