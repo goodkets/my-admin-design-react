@@ -1,45 +1,46 @@
-import { Navigate, createBrowserRouter, redirect } from "react-router-dom";
+import { Navigate, createBrowserRouter,redirect } from "react-router-dom";
 import UserLogin from "@/views/login/loginPage";
 import ModelPage from "@/views/model";
 import HomePage from "@/views/home/homePage";
-import DashboardPage from "@/views/Dashboard/DashboardPage";
+import DashboardPage  from "@/views/dashboard/dashboardPage";
 import React from "react";
-import { getToken } from "../utils/storeages";
+import { LayoutGuard } from "./utils/guard";
+import { getToken } from "@/utils/storeages";
 
-//基本路由，权限路由后面再加
 const router = createBrowserRouter([
   {
     path: "/login",
     name: "login",
     element: <UserLogin />,
     loader: () => {
-      console.log(getToken("token"));
-      if (getToken("token")) {
-        return redirect("/home");
-      } else {
-        return redirect("/login");
+      const token = getToken('token');
+      if (token) {
+        return redirect('/home');
       }
+      return null;
     },
   },
   {
     path: "/",
     name: "model",
-    element: <ModelPage />,
+    // element: <ModelPage />,
+    element: <LayoutGuard />,
     children: [
       {
         path: "/home",
-        name: "home",
+        name: "首页",
         element: <HomePage />,
       },
       {
         path: "/dashboard",
-        name: "dashboard",
+        name: "数据大屏",
         element: <DashboardPage />,
       },
       {
         path: "*",
         element: <Navigate to="/home" />,
       },
+
     ],
   },
 ]);

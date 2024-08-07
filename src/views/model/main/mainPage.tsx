@@ -13,7 +13,7 @@ const MainPage: React.FC = () => {
           style={{
             padding: 24,
             minHeight: 360,
-            height: "100%",
+            height: "100vh",
             margin: "16px 0",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
