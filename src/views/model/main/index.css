@@ -1,0 +1,20 @@
+/* 自定义滚动条的宽度 */
+.custom-scrollbar {
+  /* 设置滚动条容器的样式 */
+  overflow-y: auto;
+  /* 只有垂直滚动条 */
+  max-height: 100%;
+  /* 可以根据需要调整 */
+}
+/* 定制滚动条轨道 */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  /* 设置滚动条的宽度 */
+}
+/* 定制滚动条的滑块部分 */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  width: 10px;
+  /* 设置滑块的宽度 */
+  background-color: #ccc;
+  border-radius: 10px;
+}
