@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
         {/* 头部 */}
         <HeaderPage />
         {/* 设置 */}
-        <SettingPage />
+        {/* <SettingPage /> */}
         {/* 主体 */}
         <MainPage />
       </Layout>
