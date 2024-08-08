@@ -1,0 +1,30 @@
+.card {
+    height: 120px;
+    display: flex;
+    &-icon {
+        width: 120px;
+        height: 120px;
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        border-radius: 10px 0 0 10px;
+    }
+    &-text {
+        flex: 1;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 0 10px 10px 0;
+        .txt {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        .num {
+            font-size: 32px;
+        }
+    }
+}

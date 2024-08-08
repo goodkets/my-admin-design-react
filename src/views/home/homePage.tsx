@@ -1,5 +1,64 @@
-import React from "react";
+import React,{useState} from "react";
+import { Col, Row,Space } from "antd";
+import CountUpCard from "@/components/home/countUpCard";
+import {CountUpList} from '@/mockData/homeList'
+import DemoPie from "@/components/home/echarts/pie";
+import DemRadar from "@/components/home/echarts/radar";
+import DemoRadialBar from "@/components/home/echarts/radialBar";
+import DemoStock from "@/components/home/echarts/fetch";
+import DemoColumn from "@/components/home/echarts/column";
 const HomePage: React.FC = () => {
-  return <>homepage</>;
+  const  [isLoading,setIsLoading] = useState(true)
+  setTimeout(() => {
+    setIsLoading(false)
+  }, 1200);
+  return (
+    <>
+     <Space direction='vertical' size={12} style={{display:'flex'}}>
+       {/* 数量展示 */}
+       <Row gutter={20}>
+        {
+          CountUpList.map(item =>{
+            return (
+              <Col flex={1} key={item.title}>
+                <CountUpCard 
+                 loading={isLoading}
+                 title={item.title}
+                 color={item.color}
+                 icon={item.icon}
+                 count={item.count}
+                />
+              </Col>
+            )
+          })
+        }
+    </Row>
+      {/* 表展示 */}
+      <Row gutter={20}>
+        <Col span={8}>
+          <DemoPie loading={isLoading} />
+        </Col>
+        <Col span={8}>
+          <DemRadar loading={isLoading} />
+        </Col>
+        <Col span={8}>
+          <DemoRadialBar loading={isLoading} />
+        </Col>
+        {/* <Col span={8}>col-8</Col>
+        <Col span={8}>col-8</Col>
+        <Col span={8}>col-8</Col> */}
+      </Row>
+      {/* 图展示 */}
+      <Row gutter={20}>
+        <Col span={12}>
+          <DemoColumn loading={isLoading} />
+        </Col>
+        <Col span={12}>
+          <DemoStock loading={isLoading} />
+        </Col>
+      </Row>
+     </Space>
+    </>
+  );
 };
 export default HomePage;

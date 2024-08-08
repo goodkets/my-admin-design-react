@@ -1,12 +1,9 @@
 import React from "react";
-import { theme, Layout } from "antd";
+import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import "./index.less";
 const { Content } = Layout;
 const MainPage: React.FC = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
   return (
     <>
       <Content
@@ -22,8 +19,6 @@ const MainPage: React.FC = () => {
             padding: 24,
             minHeight: 360,
             margin: "16px 8px",
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
             overflow: "auto",
           }}
         >

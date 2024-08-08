@@ -1,10 +1,7 @@
 import { Menu, Layout } from "antd";
 import {
-  DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import React, { useState } from "react";
@@ -29,7 +26,7 @@ function getItem(
 }
 const { Sider } = Layout;
 const items: MenuItem[] = [
-  getItem("Home", "Home", <DesktopOutlined />),
+  getItem("Home", "Home", <HomeOutlined />),
   getItem("Dashboard", "Dashboard", <PieChartOutlined />),
   // getItem("User", "sub1", <UserOutlined />, [
   //   getItem("Tom", "3"),
