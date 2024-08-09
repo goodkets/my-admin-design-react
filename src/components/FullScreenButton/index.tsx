@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { FullscreenOutlined, FullscreenExitOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import { Tooltip } from "antd";
 const FullScreenButton = ({ targetRef }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -75,9 +76,12 @@ const FullScreenButton = ({ targetRef }) => {
       style={{ cursor: "pointer", fontSize: "16px" }}
       onClick={toggleFullScreen}
     >
-      <Tooltip placement="bottom" title={isFullScreen ? "退出全屏" : "全屏"}>
-        {isFullScreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-      </Tooltip>
+      <Button
+        icon={
+          isFullScreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />
+        }
+        size="small"
+      />
     </span>
   );
 };

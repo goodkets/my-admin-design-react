@@ -2,6 +2,7 @@ import { Menu, Layout } from "antd";
 import {
   PieChartOutlined,
   HomeOutlined,
+  ContainerOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import React, { useState } from "react";
@@ -10,6 +11,7 @@ import loginName from "@/assets/images/logo.png";
 import nameWhite from "@/assets/images/name_white.png";
 import "./index.less";
 import { useSelector } from "react-redux";
+import { MenuInfo } from "rc-menu/lib/interface";
 type MenuItem = Required<MenuProps>["items"][number];
 function getItem(
   label: React.ReactNode,
@@ -26,24 +28,28 @@ function getItem(
 }
 const { Sider } = Layout;
 const items: MenuItem[] = [
-  getItem("Home", "Home", <HomeOutlined />),
-  getItem("Dashboard", "Dashboard", <PieChartOutlined />),
-  // getItem("User", "sub1", <UserOutlined />, [
-  //   getItem("Tom", "3"),
-  //   getItem("Bill", "4"),
-  //   getItem("Alex", "5"),
-  // ]),
+  getItem("首页", "home", <HomeOutlined />),
+  getItem("可视化大屏", "Dashboard", <PieChartOutlined />),
+  getItem("表单", "form", <ContainerOutlined />, [
+    getItem("基础表单", "form/basic"),
+    getItem("高级表单", "form/designer"),
+  ]),
+  getItem("表格", "Table", <ContainerOutlined />, [
+    getItem("基础表格", "table/basic"),
+    getItem("高级表格", "table/designer"),
+  ]),
 ];
 const SiderPage: React.FC = () => {
   const navigate = useNavigate();
   const { menuStatus } = useSelector((state) => state.settingSlice);
-  const clickSide = (e) => {
+  const clickSide = (e: MenuInfo) => {
     console.log(e);
-    if (e.key === "Dashboard") {
-      navigate("/dashboard");
-    } else if (e.key === "Home") {
-      navigate("/home");
-    }
+    navigate(`/${e.key}`);
+    // if (e.key === "Dashboard") {
+    //   navigate("/dashboard");
+    // } else if (e.key === "Home") {
+    //   navigate("/home");
+    // }
   };
   return (
     <>

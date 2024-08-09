@@ -3,7 +3,6 @@ import { Layout } from "antd";
 import SiderPage from "./asides/asides";
 import HeaderPage from "./header/header";
 import MainPage from "./main/mainPage";
-import SettingPage from "@/components/setting/setting";
 
 const HomePage: React.FC = () => {
   return (

@@ -4,9 +4,12 @@ import { Outlet } from "react-router-dom";
 import "./index.less";
 import SettingPage from "@/components/setting";
 import isFullScreen from "@/utils/isFullScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { setchangeLoadng } from "@/store/setting";
+
 const { Content } = Layout;
 const MainPage: React.FC = () => {
-  const targenRef = useRef(null);
+  const dispatch = useDispatch();
   const [isFullScreenState, setIsFullScreenState] = useState(isFullScreen());
   useEffect(() => {
     const handleFullScreenChange = () => {
@@ -35,18 +38,25 @@ const MainPage: React.FC = () => {
       );
     };
   }, []);
+  const { changeLoadng } = useSelector((state: any) => state.settingSlice);
+  const [reloadKey, setReloadKey] = useState(0);
+  useEffect(() => {
+    if (changeLoadng) {
+      setReloadKey((prevKey) => prevKey + 1);
+      dispatch(setchangeLoadng(false));
+    }
+  }, [changeLoadng]);
   return (
     <>
+      <SettingPage />
       <Content
         className="custom-scrollbar"
         style={{
-          margin: "0 0 0 8px",
           height: isFullScreenState ? "100vh" : `calc(100vh - 64px)`,
           overflow: "auto",
           backgroundColor: "#eee",
         }}
       >
-        <SettingPage />
         <div
           style={{
             padding: 24,
@@ -55,7 +65,9 @@ const MainPage: React.FC = () => {
             overflow: "auto",
           }}
         >
-          <Outlet />
+          <div key={reloadKey}>
+            <Outlet />
+          </div>
         </div>
       </Content>
     </>
