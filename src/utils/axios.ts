@@ -25,10 +25,11 @@ const handleError = (error: AxiosError) => {
 //请求拦截
 request.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = getToken("token");
+  console.log(token, 999);
   if (token) {
-    config.headers["Authorization"] = `${token}`;
+    config.headers["token"] = `${token}`;
   }
-  config.headers["Content-Type"] = "application/json";
+  // config.headers["Content-Type"] = "application/json";
   return config;
 }, handleError);
 
@@ -38,7 +39,7 @@ request.interceptors.response.use((response: AxiosResponse) => {
   if (data.code === 200) {
     return data.data;
   } else {
-    message.error(data.msg);
+    message.error(data.message);
     return Promise.reject(data.msg);
   }
 }, handleError);

@@ -27,6 +27,9 @@ function getItem(
   } as MenuItem;
 }
 const { Sider } = Layout;
+/**
+ * 侧边栏--可以通过权限控制
+ */
 const items: MenuItem[] = [
   getItem("首页", "home", <HomeOutlined />),
   getItem("可视化大屏", "Dashboard", <PieChartOutlined />),

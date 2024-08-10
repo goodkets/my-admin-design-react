@@ -3,7 +3,7 @@ import loginIcon from "@/assets/images/logo_name.png";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
-import { reqLogin } from "@/api/user";
+import { reqLogin, reqPermission } from "@/api/user";
 import { asyncFunc } from "@/utils/asyncFunc";
 import { message } from "antd";
 import React from "react";
@@ -26,14 +26,22 @@ const UserLogin: React.FC = () => {
         if (res.token) {
           setLoading(false);
           dispatch(setUserToken(res.token));
+          getPermission();
           message.success("登录成功");
           navigate("/");
         }
       }, 2000);
     } catch (error) {
+      console.log(error);
       setLoading(false);
       message.error("登录失败");
     }
+  };
+  const getPermission = async () => {
+    asyncFunc(async () => {
+      const res = await reqPermission();
+      console.log(res);
+    }, 20);
   };
   return (
     <div className={styles["login-wrapper"]}>

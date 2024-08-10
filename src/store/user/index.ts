@@ -15,7 +15,6 @@ export const userSlice = createSlice({
       setToken("token", action.payload);
     },
     removeUserToken: (state, action) => {
-      console.log(123, action);
       state.token = "";
       removeToken(action.payload);
     },
