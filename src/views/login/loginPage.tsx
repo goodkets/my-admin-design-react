@@ -8,7 +8,7 @@ import { asyncFunc } from "@/utils/asyncFunc";
 import { message } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setUserToken } from "@/store/user";
+import { setUserToken,setUserPromission } from "@/store/user";
 import { useNavigate } from "react-router-dom";
 const UserLogin: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -17,20 +17,19 @@ const UserLogin: React.FC = () => {
   const onFinish = async (values: any) => {
     try {
       setLoading(true);
-      asyncFunc(async () => {
         const res = await reqLogin({
           username: values.username,
           password: values.password,
         });
-        console.log(res);
         if (res.token) {
-          setLoading(false);
           dispatch(setUserToken(res.token));
           getPermission();
-          message.success("登录成功");
-          navigate("/");
+          asyncFunc(() => {
+            setLoading(false);
+            message.success("登录成功");
+            navigate("home");
+          }, 2000);
         }
-      }, 2000);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -38,10 +37,8 @@ const UserLogin: React.FC = () => {
     }
   };
   const getPermission = async () => {
-    asyncFunc(async () => {
       const res = await reqPermission();
-      console.log(res);
-    }, 20);
+      dispatch(setUserPromission(JSON.stringify(res.permission)));
   };
   return (
     <div className={styles["login-wrapper"]}>

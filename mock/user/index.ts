@@ -65,11 +65,12 @@ export default [
             const token = request.headers.token;
             //查看用户信息是否包含有次token用户
             const checkUser = createUserList().find((item) => item.token === token)
+            console.log(checkUser);
             //没有返回失败的信息
             if (!checkUser) {
                 return { code: 201, data: { message: '获取失败' }}
             }
-            return { code: 200, data: { ...checkUser.permission } }
+            return { code: 200, data: { permission: checkUser.permission} }
         }
     }
 ]

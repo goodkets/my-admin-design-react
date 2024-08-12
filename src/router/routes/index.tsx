@@ -9,7 +9,7 @@ import TabDesignerPage from "@/views/table/designerPage";
 
 const routes: Routes = [
   {
-    path: "/home",
+    path: "home",
     name: "首页",
     element: <HomePage />,
     meta: {
@@ -19,7 +19,7 @@ const routes: Routes = [
     },
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     name: "数据大屏",
     element: <DashboardPage />,
     meta: {
@@ -31,9 +31,15 @@ const routes: Routes = [
   {
     path: "*",
     element: <Navigate to="/home" />,
+    name: "",
+    meta: {
+      title: "首页",
+      icon: "",
+      permission: ["home"],
+    },
   },
   {
-    path: "/form",
+    path: "form",
     name: "表单",
     meta: {
       title: "表单",
@@ -64,7 +70,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: "/table",
+    path: "table",
     name: "表格",
     meta: {
       title: "表格",

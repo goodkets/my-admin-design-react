@@ -5,7 +5,7 @@ import type {
 } from "axios";
 import axios from "axios";
 import { message } from "antd";
-import { getToken } from "@/utils/storeages";
+import { getItem } from "@/utils/storeages";
 
 const request = axios.create({
   baseURL: "/api",
@@ -24,7 +24,7 @@ const handleError = (error: AxiosError) => {
 };
 //请求拦截
 request.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const token = getToken("token");
+  const token = getItem("token");
   console.log(token, 999);
   if (token) {
     config.headers["token"] = `${token}`;

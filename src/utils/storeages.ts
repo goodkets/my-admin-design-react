@@ -1,10 +1,10 @@
 // 本地存储封装
-export const setToken = (Name: string, value: string) => {
+export const setItem = (Name: string, value: string) => {
   localStorage.setItem(Name, value);
 };
-export const getToken = (Name: string) => {
+export const getItem = (Name: string) => {
   return localStorage.getItem(Name);
 };
-export const removeToken = (Name: string) => {
+export const removeItem = (Name: string) => {
   localStorage.removeItem(Name);
 };

@@ -1,9 +1,10 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import React from "react";
 import { LayoutGuard } from "./utils/guard";
-import { getToken } from "@/utils/storeages";
 import UserLogin from "@/views/login/loginPage";
 import routes from "./routes";
+import PermissionChecker from "./utils/permission";
+import { getItem } from "@/utils/storeages";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
     name: "login",
     element: <UserLogin />,
     loader: () => {
-      const token = getToken("token");
+      const token = getItem("token");
       if (token) {
         return redirect("/home");
       }
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
     name: "model",
     element: <LayoutGuard />,
     meta: {},
-    children: [...routes],
+    // children: [...routes],
+    children: [...PermissionChecker()],
   },
 ]);
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getToken, setToken, removeToken } from "@/utils/storeages";
+import { getItem, setItem, removeItem } from "@/utils/storeages";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -7,19 +7,25 @@ export const userSlice = createSlice({
       name: "",
       role: "",
     },
-    token: getToken("token"),
+    token: getItem("token"),
+    permission: getItem("permission"),
   },
   reducers: {
     setUserToken: (state, action) => {
       state.token = action.payload;
-      setToken("token", action.payload);
+      setItem("token", action.payload);
     },
     removeUserToken: (state, action) => {
       state.token = "";
-      removeToken(action.payload);
+      removeItem(action.payload);
+      removeItem("permission");
+    },
+    setUserPromission: (state, action) => {
+      state.permission = action.payload;
+      setItem("permission", action.payload);
     },
   },
 });
-export const { setUserToken, removeUserToken } = userSlice.actions;
+export const { setUserToken, removeUserToken,setUserPromission } = userSlice.actions;
 
 export default userSlice.reducer;

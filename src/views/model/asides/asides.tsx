@@ -12,8 +12,9 @@ import nameWhite from "@/assets/images/name_white.png";
 import "./index.less";
 import { useSelector } from "react-redux";
 import { MenuInfo } from "rc-menu/lib/interface";
+import PermissionChecker from "@/router/utils/permission";
 type MenuItem = Required<MenuProps>["items"][number];
-function getItem(
+function getItems(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
@@ -27,21 +28,41 @@ function getItem(
   } as MenuItem;
 }
 const { Sider } = Layout;
+const routes = PermissionChecker();
+console.log(routes);
+let items: MenuItem[] = [];
+routes.forEach(element => {
+  if (element.meta.permission && element.name) {
+    if (element.children) {
+      let children: MenuItem[] = [];
+      element.children.forEach(item => {
+        if (item.meta.permission && item.path) {
+          children.push(getItems(item.name, item.path));
+        }
+      });
+      console.log(children,9999);
+      items.push(getItems(element.name, element.path, undefined, [...children]));
+    } else {
+      items.push(getItems(element.name, element.path));
+    }
+  }
+});
+console.log(items,888);
 /**
  * 侧边栏--可以通过权限控制
  */
-const items: MenuItem[] = [
-  getItem("首页", "home", <HomeOutlined />),
-  getItem("可视化大屏", "Dashboard", <PieChartOutlined />),
-  getItem("表单", "form", <ContainerOutlined />, [
-    getItem("基础表单", "form/basic"),
-    getItem("高级表单", "form/designer"),
-  ]),
-  getItem("表格", "Table", <ContainerOutlined />, [
-    getItem("基础表格", "table/basic"),
-    getItem("高级表格", "table/designer"),
-  ]),
-];
+// const items: MenuItem[] = [
+//   getItems("首页", "home", <HomeOutlined />),
+//   getItems("可视化大屏", "Dashboard", <PieChartOutlined />),
+//   getItems("表单", "form", <ContainerOutlined />, [
+//     getItems("基础表单", "form/basic"),
+//     getItems("高级表单", "form/designer"),
+//   ]),
+//   getItems("表格", "Table", <ContainerOutlined />, [
+//     getItems("基础表格", "table/basic"),
+//     getItems("高级表格", "table/designer"),
+//   ]),
+// ];
 const SiderPage: React.FC = () => {
   const navigate = useNavigate();
   const { menuStatus } = useSelector((state) => state.settingSlice);

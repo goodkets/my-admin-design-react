@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "@/utils/storeages";
-
+import { useSelector } from "react-redux";
+import PermissionChecker from "./permission";
 function AuthGuard({ children }: { children: JSX.Element }) {
+  // console.log(PermissionChecker())
   const navigate = useNavigate();
-
+  const token = useSelector((state: any) => state.userSlice.token);
   useEffect(() => {
-    const token = getToken("token");
-    console.log("token", token);
     if (token) {
       // 如果已经登录，则重定向到登录页面
-      navigate("/home");
+      navigate("home");
     } else {
-      navigate("/login");
+      navigate("login");
     }
   }, [navigate]);
 
