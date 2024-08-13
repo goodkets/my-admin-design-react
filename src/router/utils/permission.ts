@@ -1,13 +1,13 @@
 import routes from "../routes";
-import { getItem } from "../../utils/storeages";
+import { getItem } from "@/utils/storeages";
 
 export default function PermissionChecker() {
-  const userPermission: any = getItem("permission") || [];
+  const userPermission: any = getItem("permission") || []; //这里是本地存储的数据，拿取权限
   let newRoutes: any = [];
 
   // 检查并过滤路由
   const filterRoutes = (routes: any[]) => {
-    return routes.filter(route => {
+    return routes.filter((route) => {
       if (route.meta && route.meta.permission) {
         const permission = route.meta.permission;
         if (permission.some((item: any) => userPermission.includes(item))) {

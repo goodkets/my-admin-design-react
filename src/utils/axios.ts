@@ -25,7 +25,6 @@ const handleError = (error: AxiosError) => {
 //请求拦截
 request.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = getItem("token");
-  console.log(token, 999);
   if (token) {
     config.headers["token"] = `${token}`;
   }

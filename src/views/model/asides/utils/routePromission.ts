@@ -1,53 +1,66 @@
-import PermissionChecker from "@/router/utils/permission";
 import type { MenuProps } from "antd";
+
+// 定义菜单项类型
 type MenuItem = Required<MenuProps>["items"][number];
 
-function getItems(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-  ): MenuItem {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    } as MenuItem;
-  }
-const routes = PermissionChecker();
-
-const routePromissionMeta = (routes:any[]) =>{
-    let items: MenuItem[] = []
-    
-  routes.forEach((element) => {
-    if (element.meta.permission && element.name) {
-      let children: MenuItem[] = [];
-      if (element.children && element.children.length > 0) {
-        children = routePromissionMeta(element.children); // 递归处理子菜单
-      }
-      items.push(
-        getItems(element.name, element.path, element.meta.icon, children),
-      );
-    }
-  });
-    // routes.forEach((element) => {
-    //     if (element.meta.permission && element.name) {
-    //       if (element.children && element.children.length > 0) {
-    //         let children:MenuItem[] = []
-    //         element.children.forEach((item) => {
-    //           if (item.meta.permission && item.path) {
-    //             children.push(getItems(item.name, item.path.substring(1), item.meta.icon));
-    //           }
-    //         });
-    //         items.push(
-    //           getItems(element.name, element.path, element.meta.icon, [...children]),
-    //         );
-    //       } else {
-    //         items.push(getItems(element.name, element.path, element.meta.icon));
-    //       }
-    //     }
-    //   });
-      return items;
+// 定义路由项类型
+interface RouteItem {
+  name: string;
+  meta: {
+    permission: string[];
+    icon?: string;
+  };
+  path: string;
+  children?: RouteItem[];
 }
-export default routePromissionMeta(routes)
+
+// 创建菜单项的函数
+function getItems(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  } as MenuItem;
+}
+
+// 获取经过权限过滤的路由
+
+// 处理路由并转换成菜单项
+const routePromissionMeta = (routes: RouteItem[]): MenuItem[] => {
+  const processRoutes = (
+    routeList: RouteItem[],
+    currentDepth = 0,
+    maxDepth = 10,
+  ): MenuItem[] => {
+    if (currentDepth > maxDepth) return []; // 防止递归过深
+    const result: MenuItem[] = [];
+    for (const element of routeList) {
+      if (element.meta.permission && element.name) {
+        let keyPath = element.path;
+        if (currentDepth !== 0) {
+          keyPath = element.path.substring(1);
+        }
+        if (element.children && element.children.length > 0) {
+          const children = processRoutes(element.children, currentDepth + 1);
+          result.push(
+            getItems(element.name, keyPath, element.meta.icon, children),
+          );
+        } else {
+          result.push(getItems(element.name, keyPath, element.meta.icon));
+        }
+      }
+    }
+    return result;
+  };
+
+  return processRoutes(routes);
+};
+
+// 导出处理后的菜单项
+export default routePromissionMeta;

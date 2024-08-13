@@ -50,19 +50,31 @@ const routes: Routes = [
     name: "表单",
     meta: {
       title: "表单",
-      icon:  <FormOutlined />,
+      icon: <FormOutlined />,
       permission: ["form"],
     },
     children: [
       {
         path: "/form/basic",
         name: "基础表单",
-        element: <BasignerPage />,
+        // element: <BasignerPage />,
         meta: {
           title: "基础表单",
-          icon:  <FormOutlined />,
+          icon: <FormOutlined />,
           permission: ["formBas"],
         },
+        children: [
+          {
+            path: "/form/basic/basic",
+            name: "操作表单",
+            element: <BasignerPage />,
+            meta: {
+              title: "基础表单1",
+              icon: <FormOutlined />,
+              permission: ["formBas"],
+            },
+          },
+        ],
       },
       {
         path: "/form/designer",
@@ -70,7 +82,7 @@ const routes: Routes = [
         element: <DesigneerPage />,
         meta: {
           title: "高级表单",
-          icon:  <FormOutlined />,
+          icon: <FormOutlined />,
           permission: ["formDes"],
         },
       },
@@ -91,7 +103,7 @@ const routes: Routes = [
         element: <TabBasicPage />,
         meta: {
           title: "基础表格",
-          icon:  <TableOutlined />,
+          icon: <TableOutlined />,
           permission: ["tableBas"],
         },
       },
@@ -101,7 +113,7 @@ const routes: Routes = [
         element: <TabDesignerPage />,
         meta: {
           title: "高级表格",
-          icon:  <TableOutlined />,
+          icon: <TableOutlined />,
           permission: ["tableDes"],
         },
       },

@@ -1,6 +1,5 @@
 import { Menu, Layout } from "antd";
 
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import loginName from "@/assets/images/logo.png";
@@ -9,11 +8,13 @@ import "./index.less";
 import { useSelector } from "react-redux";
 import { MenuInfo } from "rc-menu/lib/interface";
 import routePromissionMeta from "./utils/routePromission";
+import PermissionChecker from "@/router/utils/permission";
 const { Sider } = Layout;
 
 const SiderPage: React.FC = () => {
-  
-let items = [...routePromissionMeta];
+  const routes = PermissionChecker();
+  const items = [...routePromissionMeta(routes)];
+  console.log(items);
   const navigate = useNavigate();
   const { menuStatus } = useSelector((state) => state.settingSlice);
   const clickSide = (e: MenuInfo) => {
@@ -30,7 +31,7 @@ let items = [...routePromissionMeta];
             <img src={nameWhite} alt="" className="logo-img-white" />
           ) : null}
         </div>
-        <Menu 
+        <Menu
           theme="dark"
           defaultSelectedKeys={["Home"]}
           mode="inline"

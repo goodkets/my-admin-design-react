@@ -12,7 +12,6 @@ export const settingSlice = createSlice({
     setchangeLoadng: (state, action) => {
       state.changeLoadng = action.payload;
     },
-
   },
 });
 export const { setmenuStatus, setchangeLoadng } = settingSlice.actions;
