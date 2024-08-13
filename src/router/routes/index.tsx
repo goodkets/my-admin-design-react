@@ -6,6 +6,13 @@ import BasignerPage from "@/views/form/basicPage";
 import DesigneerPage from "@/views/form/designerPage";
 import TabBasicPage from "@/views/table/basicPage";
 import TabDesignerPage from "@/views/table/designerPage";
+import {
+  PieChartOutlined,
+  HomeOutlined,
+  ContainerOutlined,
+  FormOutlined,
+  TableOutlined,
+} from "@ant-design/icons";
 
 const routes: Routes = [
   {
@@ -14,7 +21,7 @@ const routes: Routes = [
     element: <HomePage />,
     meta: {
       title: "首页",
-      icon: "",
+      icon: <HomeOutlined />,
       permission: ["home"],
     },
   },
@@ -24,7 +31,7 @@ const routes: Routes = [
     element: <DashboardPage />,
     meta: {
       title: "数据大屏",
-      icon: "",
+      icon: <PieChartOutlined />,
       permission: ["dashboard"],
     },
   },
@@ -34,7 +41,7 @@ const routes: Routes = [
     name: "",
     meta: {
       title: "首页",
-      icon: "",
+      icon: <HomeOutlined />,
       permission: ["home"],
     },
   },
@@ -43,7 +50,7 @@ const routes: Routes = [
     name: "表单",
     meta: {
       title: "表单",
-      icon: "",
+      icon:  <FormOutlined />,
       permission: ["form"],
     },
     children: [
@@ -53,7 +60,7 @@ const routes: Routes = [
         element: <BasignerPage />,
         meta: {
           title: "基础表单",
-          icon: "",
+          icon:  <FormOutlined />,
           permission: ["formBas"],
         },
       },
@@ -63,7 +70,7 @@ const routes: Routes = [
         element: <DesigneerPage />,
         meta: {
           title: "高级表单",
-          icon: "",
+          icon:  <FormOutlined />,
           permission: ["formDes"],
         },
       },
@@ -74,7 +81,7 @@ const routes: Routes = [
     name: "表格",
     meta: {
       title: "表格",
-      icon: "",
+      icon: <ContainerOutlined />,
       permission: ["table"],
     },
     children: [
@@ -84,7 +91,7 @@ const routes: Routes = [
         element: <TabBasicPage />,
         meta: {
           title: "基础表格",
-          icon: "",
+          icon:  <TableOutlined />,
           permission: ["tableBas"],
         },
       },
@@ -94,7 +101,7 @@ const routes: Routes = [
         element: <TabDesignerPage />,
         meta: {
           title: "高级表格",
-          icon: "",
+          icon:  <TableOutlined />,
           permission: ["tableDes"],
         },
       },

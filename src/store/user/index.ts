@@ -26,6 +26,7 @@ export const userSlice = createSlice({
     },
   },
 });
-export const { setUserToken, removeUserToken,setUserPromission } = userSlice.actions;
+export const { setUserToken, removeUserToken, setUserPromission } =
+  userSlice.actions;
 
 export default userSlice.reducer;

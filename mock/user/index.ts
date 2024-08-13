@@ -6,14 +6,14 @@ function createUserList() {
             username: 'admin',
             password: '111111',
             token: 'Admin Token',
-            permission: ['home', 'dashboard', 'form', 'table'],
+            permission: [{ name: 'home'},{ name: 'dashboard'},{ name: 'form', children: ['formBas', 'formDes']},{ name: 'table', children: ['tableBas', 'tableDes']}],
         },
         {
             userId: 2,
             username: 'system',
             password: '111111',
             token: 'System Token',
-            permission: [{ name: 'home'},{ name: 'dashboard'},{ name: 'form', children: ['formBas', 'formDes']},{ name: 'table', children: ['tableBas', 'tableDes']}],
+            permission: ['home', 'dashboard'],
         },
     ]
 }
