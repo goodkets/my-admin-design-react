@@ -14,11 +14,9 @@ const { Sider } = Layout;
 const SiderPage: React.FC = () => {
   const routes = PermissionChecker();
   const items = [...routePromissionMeta(routes)];
-  console.log(items);
   const navigate = useNavigate();
   const { menuStatus } = useSelector((state) => state.settingSlice);
   const clickSide = (e: MenuInfo) => {
-    console.log(e);
     navigate(`/${e.key}`);
   };
   return (

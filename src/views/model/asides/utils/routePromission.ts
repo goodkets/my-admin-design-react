@@ -29,8 +29,6 @@ function getItems(
   } as MenuItem;
 }
 
-// 获取经过权限过滤的路由
-
 // 处理路由并转换成菜单项
 const routePromissionMeta = (routes: RouteItem[]): MenuItem[] => {
   const processRoutes = (
@@ -43,7 +41,7 @@ const routePromissionMeta = (routes: RouteItem[]): MenuItem[] => {
     for (const element of routeList) {
       if (element.meta.permission && element.name) {
         let keyPath = element.path;
-        if (currentDepth !== 0) {
+        if (result.length == 0) {
           keyPath = element.path.substring(1);
         }
         if (element.children && element.children.length > 0) {

@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: "dashboard",
     name: "数据大屏",
-    element: <DashboardPage />,
+    // element: <DashboardPage />,
     meta: {
       title: "数据大屏",
       icon: <PieChartOutlined />,
