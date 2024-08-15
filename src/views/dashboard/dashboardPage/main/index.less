@@ -1,0 +1,108 @@
+.dashboardPage {
+    height: 100vh;
+    overflow: hidden;
+    background-image: url("@/assets/echarts/images/bg.png");
+    .header-main {
+        width: 100%;
+        height: 65px;
+        position: relative;
+        .left_bg {
+            position: absolute;
+            right: 0;
+            width: 62%;
+            height: 100%;
+            background-position: right;
+            background: url("@/assets/echarts/images/left_header.png") 0 10px no-repeat;
+        }
+        .right_bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 53%;
+            height: 100%;
+            background: url("@/assets/echarts/images/right_header.png") 0 10px no-repeat;
+        }
+        h3 {
+            text-align: center;
+            color: #fff;
+            line-height: 65px;
+            font-size: 30px;
+            padding-top: 10px;
+        }
+    }
+    .wrapper {
+        margin-top: 1%;
+        color: #fff;
+        .title {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            font-size: 20px;
+            line-height: 50px;
+        }
+        .map {
+            position: relative;
+            height: 40vh;
+            margin: 50px 0 -10px;
+            @keyframes bganomation{
+                0%{width: 50%;}
+                50%{width: 0%;}
+                100%{width: 50%;}
+            }
+            
+            @keyframes rotate1{
+                100%{
+                    transform: translate(-50%, -50%) rotate(360deg);
+                }
+            }
+            
+            @keyframes retate2{
+                100%{transform: translate(-50%, -50%) rotate(-360deg);}
+            }
+            .map_bg {
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                width: 43vh;
+                height: 43vh;
+                min-width: 280px;
+                min-height: 280px;
+                transform: translate(-50%,-50%);
+                background: url("@/assets/echarts/images/map.png") center no-repeat;
+                background-size: 43vh 43vh;
+                opacity: 0.5;
+            }
+            .jt {
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                width: 45vh;
+                height: 45vh;
+                min-width: 280px;
+                min-height: 280px;
+                transform: translate(-50%,-50%);
+                animation: retate2 10s linear infinite;
+                background: url('@/assets/echarts/images/jt.png') center no-repeat;
+                background-size:contain;
+            }
+            .lbx {
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                width: 50vh;
+                height: 50vh;
+                transform: translate(-50%,-50%);
+                background-size: 52vh 52vh;
+                animation: rotate1 10s linear infinite;
+                opacity: 0.4;
+                background: url('@/assets/echarts/images/lbx.png') center no-repeat;
+            }
+            .map-list {
+                width: 100%;
+                height: 50vh;
+                position: absolute;
+            }
+        }
+    }
+}
+

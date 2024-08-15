@@ -14,10 +14,12 @@
   "dependencies": {
     "@ant-design/charts": "^2.1.2",
     "@ant-design/plots": "^2.2.8",
+    "@jiaminghi/data-view-react": "^1.2.5",
     "@reduxjs/toolkit": "^2.2.7",
     "antd": "^5.19.4",
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
+    "echarts": "^5.5.1",
     "eslint": "^8.57.0",
     "less": "^4.2.0",
     "lint": "^0.8.19",
