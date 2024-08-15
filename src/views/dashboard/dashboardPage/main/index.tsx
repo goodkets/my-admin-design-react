@@ -157,7 +157,10 @@ const mainPage: React.FC = () => {
                   <div className="jt"></div>
                   <div className="lbx"></div>
                   <div className="map-list">
-                    <MapComponent id="mainMap3" />
+                    {/* 12313 */}
+                    <div className="map-content">
+                      <MapComponent id="mainMap3" />
+                    </div>
                   </div>
                 </div>
                 <div className="bar">

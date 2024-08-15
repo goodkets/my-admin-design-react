@@ -107,8 +107,19 @@
   background: url('@/assets/echarts/images/lbx.png') center no-repeat;
 }
 .dashboardPage .wrapper .map .map-list {
+  width: 100vw;
   height: 47vh;
   position: relative;
-  top: -20%;
-  left: 28%;
+  margin: 0 auto;
+  top: -10vh;
+}
+.dashboardPage .wrapper .map .map-list .map-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  /* 设置宽度与 .map-list 相同 */
+  height: 100%;
+  /* 设置高度与 .map-list 相同 */
+  transform: translate(-38%, -50%);
 }

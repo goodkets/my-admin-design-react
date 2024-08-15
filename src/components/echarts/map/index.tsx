@@ -31,7 +31,7 @@ const MapComponent: React.FC<MapProps> = ({ id }) => {
         color: "#c3dbff", // 文字颜色
       },
       inverse: true, //颜色反转
-      left: "50%",
+      left: "500vh",
     },
     series: [
       // 图表系列配置
