@@ -91,7 +91,7 @@
   min-height: 280px;
   transform: translate(-50%, -50%);
   animation: retate2 10s linear infinite;
-  background: url('@/assets/echarts/images/jt.png') center no-repeat;
+  background: url("@/assets/echarts/images/jt.png") center no-repeat;
   background-size: contain;
 }
 .dashboardPage .wrapper .map .lbx {
@@ -104,7 +104,7 @@
   background-size: 54vh 54vh;
   animation: rotate1 10s linear infinite;
   opacity: 0.4;
-  background: url('@/assets/echarts/images/lbx.png') center no-repeat;
+  background: url("@/assets/echarts/images/lbx.png") center no-repeat;
 }
 .dashboardPage .wrapper .map .map-list {
   width: 100vw;

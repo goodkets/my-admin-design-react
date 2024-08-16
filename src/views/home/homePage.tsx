@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Col, Row, Space } from "antd";
 import CountUpCard from "@/components/home/countUpCard";
 import { CountUpList } from "@/mockData/homeList";

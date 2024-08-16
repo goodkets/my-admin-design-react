@@ -1,7 +1,7 @@
 import "./index.less";
 import React, { useRef } from "react";
 import FullScreenButton from "@/components/FullScreenButton";
-import { Button, Row, Col, Dropdown, Space } from "antd";
+import { Button, Row, Col, Dropdown, Space, Breadcrumb } from "antd";
 import { RedoOutlined, CloseOutlined, RightOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { setchangeLoadng } from "@/store/setting";
@@ -23,10 +23,11 @@ const settingPage: React.FC = () => {
       // icon: <PoweroffOutlined />,
     },
   ];
+
   return (
     <div ref={targenRef}>
       <div className="settings">
-        <div className="bread">面包屑</div>
+        <div className="bread"></div>
         <div className="settings-right">
           <Row gutter={3}>
             <Col flex={1}>

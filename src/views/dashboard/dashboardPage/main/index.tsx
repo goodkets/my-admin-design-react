@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WithLoading from "@/components/withLoading";
 import "./index.less";
-import { Button, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import {
   BorderBox13,
   Decoration5,
@@ -22,8 +22,10 @@ import BarChartComponent from "@/components/echarts/dataset";
 import PieChartComponent from "@/components/echarts/chart";
 import CityChartComponent from "@/components/echarts/citys";
 import StackedtComponent from "@/components/echarts/stacked";
+import { Navigate } from "react-router";
 
-const mainPage: React.FC = () => {
+const mainPage: React.FC = (props) => {
+  console.log("mainPage", props);
   const [DigNumber, setDigNumber] = useState(7653112);
 
   const [currentDigitalFlopList, setCurrentDigitalFlopList] = useState(
@@ -41,6 +43,7 @@ const mainPage: React.FC = () => {
     return () => clearInterval(timer);
   }, [DigNumber]);
   useEffect(() => {
+    console.log("进入页面");
     toggleFullScreen();
   }, []);
 
@@ -64,6 +67,11 @@ const mainPage: React.FC = () => {
    * 全屏
    */
   const toggleFullScreen = () => {
+    document.addEventListener("fullscreenchange", function () {
+      if (!document.fullscreenElement) {
+        Navigate("/home");
+      }
+    });
     if (
       !document.fullscreenElement &&
       !document.webkitIsFullScreen &&
@@ -105,6 +113,7 @@ const mainPage: React.FC = () => {
             <h3>大数据平台</h3>
             <div style={{ marginTop: "-40px" }}>
               <Decoration5
+                loading={props.isLoading}
                 style={{ width: "300px", height: "40px", margin: "0 auto" }}
               />
             </div>
@@ -113,7 +122,10 @@ const mainPage: React.FC = () => {
             <Row gutter={20}>
               <Col span={6}>
                 <div>
-                  <BorderBox13 style={{ padding: "10px" }}>
+                  <BorderBox13
+                    loading={props.isLoading}
+                    style={{ padding: "10px" }}
+                  >
                     <ScrollRankingBoard
                       config={ScrollRankingBoardList}
                       style={{
@@ -125,7 +137,10 @@ const mainPage: React.FC = () => {
                   </BorderBox13>
                 </div>
                 <div style={{ marginTop: "10px" }}>
-                  <BorderBox13 style={{ padding: "10px" }}>
+                  <BorderBox13
+                    loading={props.isLoading}
+                    style={{ padding: "10px" }}
+                  >
                     <ScrollBoard
                       config={ScrollBoardList}
                       style={{
@@ -140,6 +155,7 @@ const mainPage: React.FC = () => {
               <Col span={12}>
                 <div className="title">
                   <DigitalFlop
+                    loading={props.isLoading}
                     config={currentDigitalFlopList}
                     style={{ height: "60px", width: "100%" }}
                   />
@@ -159,7 +175,7 @@ const mainPage: React.FC = () => {
                   <div className="map-list">
                     {/* 12313 */}
                     <div className="map-content">
-                      <MapComponent id="mainMap3" />
+                      <MapComponent loading={props.isLoading} id="mainMap3" />
                     </div>
                   </div>
                 </div>
@@ -167,13 +183,14 @@ const mainPage: React.FC = () => {
                   <Row gutter={10}>
                     <Col span={12}>
                       <BorderBox8
+                        loading={props.isLoading}
                         style={{ height: "34vh", padding: "10px 0 0 0" }}
                       >
                         <BarChartComponent id="mainBar" data={dataset1} />
                       </BorderBox8>
                     </Col>
                     <Col span={12}>
-                      <BorderBox8>
+                      <BorderBox8 loading={props.isLoading}>
                         <BarChartComponent id="mainBar" data={dataset2} />
                       </BorderBox8>
                     </Col>
@@ -181,14 +198,22 @@ const mainPage: React.FC = () => {
                 </div>
               </Col>
               <Col span={6}>
-                <BorderBox1 title="主播类占比" style={{ height: "28vh" }}>
+                <BorderBox1
+                  loading={props.isLoading}
+                  title="主播类占比"
+                  style={{ height: "28vh" }}
+                >
                   <div style={{ textAlign: "center", color: "#01c4f7" }}>
                     主播类型占比
                   </div>
                   <PieChartComponent />
                 </BorderBox1>
                 <br />
-                <BorderBox1 title="直播类占比" style={{ height: "27vh" }}>
+                <BorderBox1
+                  loading={props.isLoading}
+                  title="直播类占比"
+                  style={{ height: "27vh" }}
+                >
                   <div
                     style={{
                       textAlign: "center",
@@ -200,7 +225,11 @@ const mainPage: React.FC = () => {
                   <CityChartComponent />
                 </BorderBox1>
                 <br />
-                <BorderBox1 title="直播类占比" style={{ height: "28vh" }}>
+                <BorderBox1
+                  loading={props.isLoading}
+                  title="直播类占比"
+                  style={{ height: "28vh" }}
+                >
                   <div style={{ textAlign: "center", color: "#01c4f7" }}>
                     Top10城市各类占比
                   </div>

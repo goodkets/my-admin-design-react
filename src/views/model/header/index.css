@@ -11,6 +11,9 @@
   height: 20px;
   font-size: 25px;
 }
+.header-left .crumb {
+  margin-left: 40px;
+}
 .header-right {
   display: flex;
   font-size: 20px;

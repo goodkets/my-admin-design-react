@@ -11,5 +11,3 @@ export const asyncFunc = (fn: () => void, time: number) => {
     }
   });
 };
-
-

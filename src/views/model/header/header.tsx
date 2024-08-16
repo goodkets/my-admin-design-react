@@ -10,6 +10,8 @@ import {
   FullscreenExitOutlined,
   PoweroffOutlined,
   LockFilled,
+  SettingOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import "./index.less";
 import { useDispatch } from "react-redux";
@@ -27,9 +29,6 @@ const HeaderPage: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const dispatch = useDispatch();
   const [isFullScreen, setIsFullScreen] = useState(false); // 新增状态跟踪全屏模式
-
-  // 定义面包屑导航的项
-  const breadcrumbItems = [{ title: "User" }, { title: "Bill" }];
   const changeStatus = () => {
     setCollapsed(!collapsed);
     dispatch(setmenuStatus(!collapsed));
@@ -122,7 +121,25 @@ const HeaderPage: React.FC = () => {
       icon: <PoweroffOutlined />,
     },
   ];
-
+  // 定义面包屑导航的项
+  const breadcrumbItems = [
+    {
+      title: (
+        <>
+          <HomeOutlined />
+          <span>首页</span>
+        </>
+      ),
+    },
+    {
+      title: (
+        <>
+          <SettingOutlined />
+          <span>表格</span>
+        </>
+      ),
+    },
+  ];
   return (
     <>
       <Header
@@ -138,7 +155,9 @@ const HeaderPage: React.FC = () => {
             >
               {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </div>
-            {/* <Breadcrumb items={breadcrumbItems} style={{ margin: "16px 0" }} /> */}
+            <div className="crumb">
+              <Breadcrumb items={breadcrumbItems} separator=">" />
+            </div>
           </div>
           <div className="header-right">
             <div className="setting">
