@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react"; // 导入React相关库
 import * as echarts from "echarts"; // 导入ECharts库
 import china from "@/json/map//map/json/china.json";
-import { provienceData } from "../data";
+import { provienceData } from "./data";
 echarts.registerMap("china", china); //注册地图
 // 定义组件接收的属性类型
 interface MapProps {
@@ -31,7 +31,7 @@ const MapComponent: React.FC<MapProps> = ({ id }) => {
         color: "#c3dbff", // 文字颜色
       },
       inverse: true, //颜色反转
-      left: "500vh",
+      // left: "500vh",
     },
     series: [
       // 图表系列配置

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import WithLoading from "@/components/withLoading";
 import "./index.less";
-import { Col, Row,  Button } from "antd";
-import { SwapOutlined } from '@ant-design/icons';
+import { Col, Row, Button } from "antd";
+import { SwapOutlined } from "@ant-design/icons";
 import {
   BorderBox13,
   Decoration5,
@@ -158,40 +158,54 @@ const mainPage: React.FC = (props) => {
                 </div>
               </Col>
               <Col span={12}>
-                <div  onClick={changeMap} style={{position:'absolute'}}> <Button type="primary" icon={<SwapOutlined />}>地图切换</Button></div>
-                  <div className="map2">
-                  <div className="title" >
-                    {isMap ?           
-                  <DigitalFlop
-                    loading={props.isLoading}
-                    config={currentDigitalFlopList}
-                    style={{ height: "60px", width: "100%" }}
-                  />
-                   :                  <DigitalFlop
-                   loading={props.isLoading}
-                   config={{content:'map路线'}}
-                   style={{ height: "60px", width: "100%" }}
-                 />}
-                  <Decoration1
-                    style={{
-                      width: "200px",
-                      height: "50px",
-                      position: "absolute",
-                      right: 0,
-                    }}
-                  />
+                <div onClick={changeMap} style={{ position: "absolute" }}>
+                  {" "}
+                  <Button type="primary" icon={<SwapOutlined />}>
+                    地图切换
+                  </Button>
                 </div>
-                <div className="map">
-                  <div className="map_bg"></div>
-                  <div className="jt"></div>
-                  <div className="lbx"></div>
-                  <div className="map-list">
-                    <div className="map-content">
-                      {isMap ? <MapComponent loading={props.isLoading} id="mainMap3"  /> : <MapCoorComponents  />}
+                <div className="map2">
+                  <div className="title">
+                    {isMap ? (
+                      <DigitalFlop
+                        loading={props.isLoading}
+                        config={currentDigitalFlopList}
+                        style={{ height: "60px", width: "100%" }}
+                      />
+                    ) : (
+                      <DigitalFlop
+                        loading={props.isLoading}
+                        config={{ content: "map路线" }}
+                        style={{ height: "60px", width: "100%" }}
+                      />
+                    )}
+                    <Decoration1
+                      style={{
+                        width: "200px",
+                        height: "50px",
+                        position: "absolute",
+                        right: 0,
+                      }}
+                    />
+                  </div>
+                  <div className="map">
+                    <div className="map_bg"></div>
+                    <div className="jt"></div>
+                    <div className="lbx"></div>
+                    <div className="map-list">
+                      <div className="map-content">
+                        {isMap ? (
+                          <MapComponent
+                            loading={props.isLoading}
+                            id="mainMap3"
+                          />
+                        ) : (
+                          <MapCoorComponents />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-                  </div>
                 <div className="bar">
                   <Row gutter={10}>
                     <Col span={12}>
