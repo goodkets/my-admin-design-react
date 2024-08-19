@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import WithLoading from "@/components/withLoading";
 import "./index.less";
-import { Col, Row } from "antd";
+import { Col, Row,  Button } from "antd";
+import { SwapOutlined } from '@ant-design/icons';
 import {
   BorderBox13,
   Decoration5,
@@ -22,10 +23,11 @@ import BarChartComponent from "@/components/echarts/dataset";
 import PieChartComponent from "@/components/echarts/chart";
 import CityChartComponent from "@/components/echarts/citys";
 import StackedtComponent from "@/components/echarts/stacked";
+import MapCoorComponents from "@/components/echarts/map/mapCoor";
 import { Navigate } from "react-router";
 
 const mainPage: React.FC = (props) => {
-  console.log("mainPage", props);
+  const [isMap, setIsMap] = useState(false);
   const [DigNumber, setDigNumber] = useState(7653112);
 
   const [currentDigitalFlopList, setCurrentDigitalFlopList] = useState(
@@ -103,6 +105,9 @@ const mainPage: React.FC = (props) => {
       }
     }
   };
+  const changeMap = () => {
+    setIsMap(!isMap);
+  };
   return (
     <div>
       <div className="dashboardPage">
@@ -153,12 +158,20 @@ const mainPage: React.FC = (props) => {
                 </div>
               </Col>
               <Col span={12}>
-                <div className="title">
+                <div  onClick={changeMap} style={{position:'absolute'}}> <Button type="primary" icon={<SwapOutlined />}>地图切换</Button></div>
+                  <div className="map2">
+                  <div className="title" >
+                    {isMap ?           
                   <DigitalFlop
                     loading={props.isLoading}
                     config={currentDigitalFlopList}
                     style={{ height: "60px", width: "100%" }}
                   />
+                   :                  <DigitalFlop
+                   loading={props.isLoading}
+                   config={{content:'map路线'}}
+                   style={{ height: "60px", width: "100%" }}
+                 />}
                   <Decoration1
                     style={{
                       width: "200px",
@@ -173,12 +186,12 @@ const mainPage: React.FC = (props) => {
                   <div className="jt"></div>
                   <div className="lbx"></div>
                   <div className="map-list">
-                    {/* 12313 */}
                     <div className="map-content">
-                      <MapComponent loading={props.isLoading} id="mainMap3" />
+                      {isMap ? <MapComponent loading={props.isLoading} id="mainMap3"  /> : <MapCoorComponents  />}
                     </div>
                   </div>
                 </div>
+                  </div>
                 <div className="bar">
                   <Row gutter={10}>
                     <Col span={12}>
