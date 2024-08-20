@@ -6,7 +6,9 @@ function createUserList() {
             username: 'admin',
             password: '111111',
             token: 'Admin Token',
-            permission: [{ name: 'home'},{ name: 'dashboard'},{ name: 'form', children: ['formBas', 'formDes']},{ name: 'table', children: ['tableBas', 'tableDes']}],
+            permission: [{ name: 'home'},{ name: 'dashboard'},{ name: 'form', children: ['formBas', 'formDes']},{ name: 'table', children: ['tableBas', 'tableDes']},{
+                name: 'image',children:['imageCropper']
+            }],
         },
         {
             userId: 2,

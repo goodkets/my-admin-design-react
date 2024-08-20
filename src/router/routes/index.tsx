@@ -6,6 +6,7 @@ import BasignerPage from "@/views/form/basicPage";
 import DesigneerPage from "@/views/form/designerPage";
 import TabBasicPage from "@/views/table/basicPage";
 import TabDesignerPage from "@/views/table/designerPage";
+import ImageCropper from "@/views/image/image-cropper";
 import {
   PieChartOutlined,
   HomeOutlined,
@@ -28,7 +29,6 @@ const routes: Routes = [
   {
     path: "dashboard",
     name: "数据大屏",
-    // element: <DashboardPage />,
     meta: {
       title: "数据大屏",
       icon: <PieChartOutlined />,
@@ -46,6 +46,26 @@ const routes: Routes = [
     },
   },
   {
+    path: "image",
+    name: "图片裁剪",
+    meta: {
+      title: "图片裁剪",
+      icon: <ContainerOutlined />,
+      permission: ["image"],
+    },
+    children: [
+      {
+        path: "/image/cropper",
+        name: "图片裁剪",
+        element: <ImageCropper />,
+        meta: {
+          title: "图片裁剪",
+          permission: ["imageCropper"],
+        },
+      },
+    ],
+  },
+  {
     path: "form",
     name: "表单",
     meta: {
@@ -57,7 +77,6 @@ const routes: Routes = [
       {
         path: "/form/basic",
         name: "基础表单",
-        // element: <BasignerPage />,
         meta: {
           title: "基础表单",
           icon: <FormOutlined />,

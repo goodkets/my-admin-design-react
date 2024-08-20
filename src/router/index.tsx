@@ -6,6 +6,7 @@ import PermissionChecker from "./utils/permission";
 import { getItem } from "@/utils/storeages";
 import DashboardPage from "@/views/dashboard/dashboardPage";
 import { PieChartOutlined } from "@ant-design/icons";
+import PageException from "@/views/exception";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +36,12 @@ const router = createBrowserRouter([
     name: "model",
     element: <LayoutGuard />,
     meta: {},
-    // children: [...routes],
     children: [...PermissionChecker()],
+  },
+  {
+    path: "/403",
+    name: "exception",
+    element: <PageException />,
   },
 ]);
 
