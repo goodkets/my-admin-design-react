@@ -233,7 +233,7 @@ const mainPage: React.FC = (props) => {
                   <div style={{ textAlign: "center", color: "#01c4f7" }}>
                     主播类型占比
                   </div>
-                  <PieChartComponent />
+                  <PieChartComponent id="mainPie" />
                 </BorderBox1>
                 <br />
                 <BorderBox1
