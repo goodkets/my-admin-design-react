@@ -21,9 +21,8 @@ const beforeUpload = (file: FileType) => {
 const upload: React.FC = (props) => {
   const [alertStatus, setalertStatus] = useState("");
   const handleChange: UploadProps["onChange"] = (info) => {
-    if (info.file.status === "uploading") {
-      setalertStatus("uploading");
-    } else if (info.file.status === "done") {
+    console.log("info", info);
+    if (info.fileList.length > 0) {
       setalertStatus("success");
     } else {
       setalertStatus("error");
@@ -64,7 +63,7 @@ const upload: React.FC = (props) => {
           </Button>
         </Upload>
       </Flex>
-      {alertStatus == "uploading" ? (
+      {alertStatus == "success" ? (
         <AlertComponents messages="success" txt="上传成功" />
       ) : (
         <AlertComponents messages="error" txt="上传失败" />
