@@ -7,7 +7,7 @@ function createUserList() {
             password: '111111',
             token: 'Admin Token',
             permission: [{ name: 'home'},{ name: 'dashboard'},{ name: 'form', children: ['formBas', 'formDes']},{ name: 'table', children: ['tableBas', 'tableDes']},{
-                name: 'image',children:['imageCropper']
+                name: 'image',children:['imageCropper','imageCompress']
             }],
         },
         {

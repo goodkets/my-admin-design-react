@@ -1,12 +1,12 @@
 import { Navigate } from "react-router-dom";
 import React from "react";
 import HomePage from "@/views/home/homePage";
-import DashboardPage from "@/views/dashboard/dashboardPage";
 import BasignerPage from "@/views/form/basicPage";
 import DesigneerPage from "@/views/form/designerPage";
 import TabBasicPage from "@/views/table/basicPage";
 import TabDesignerPage from "@/views/table/designerPage";
 import ImageCropper from "@/views/image/image-cropper";
+import ImageCompress from "@/views/image/image-compress";
 import {
   PieChartOutlined,
   HomeOutlined,
@@ -44,26 +44,6 @@ const routes: Routes = [
       icon: <HomeOutlined />,
       permission: ["home"],
     },
-  },
-  {
-    path: "image",
-    name: "图片裁剪",
-    meta: {
-      title: "图片裁剪",
-      icon: <ContainerOutlined />,
-      permission: ["image"],
-    },
-    children: [
-      {
-        path: "/image/cropper",
-        name: "图片裁剪",
-        element: <ImageCropper />,
-        meta: {
-          title: "图片裁剪",
-          permission: ["imageCropper"],
-        },
-      },
-    ],
   },
   {
     path: "form",
@@ -134,6 +114,35 @@ const routes: Routes = [
           title: "高级表格",
           icon: <TableOutlined />,
           permission: ["tableDes"],
+        },
+      },
+    ],
+  },
+  {
+    path: "image",
+    name: "图片功能",
+    meta: {
+      title: "图片功能",
+      icon: <ContainerOutlined />,
+      permission: ["image"],
+    },
+    children: [
+      {
+        path: "/image/compress",
+        name: "图片压缩",
+        element: <ImageCompress />,
+        meta: {
+          title: "图片压缩",
+          permission: ["imageCompress"],
+        },
+      },
+      {
+        path: "/image/cropper",
+        name: "图片裁剪",
+        element: <ImageCropper />,
+        meta: {
+          title: "图片裁剪",
+          permission: ["imageCropper"],
         },
       },
     ],

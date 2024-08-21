@@ -4,7 +4,6 @@ import { getItem } from "@/utils/storeages";
 export default function PermissionChecker() {
   const userPermission: any = getItem("permission") || []; //这里是本地存储的数据，拿取权限
   let newRoutes: any = [];
-
   // 检查并过滤路由
   const filterRoutes = (routes: any[]) => {
     return routes.filter((route) => {
