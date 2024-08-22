@@ -7,6 +7,7 @@ import UserLogin from "@/views/login/loginPage";
 import PermissionChecker from "./utils/permission";
 import DashboardPage from "@/views/dashboard/dashboardPage";
 import PageException from "@/views/exception";
+import ModelPage from "@/views/model";
 
 const router = createBrowserRouter([
   {
@@ -34,14 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     name: "model",
-    element: <LayoutGuard />,
+    element: <ModelPage />,
     meta: {},
     children: [...PermissionChecker()],
-  },
-  {
-    path: "/403",
-    name: "exception",
-    element: <PageException />,
+    errorElement: <PageException />,
   },
 ]);
 

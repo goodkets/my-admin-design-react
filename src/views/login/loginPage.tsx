@@ -27,7 +27,7 @@ const UserLogin: React.FC = () => {
         asyncFunc(() => {
           setLoading(false);
           message.success("登录成功");
-          navigate("home");
+          navigate("/home");
         }, 2000);
       }
     } catch (error) {

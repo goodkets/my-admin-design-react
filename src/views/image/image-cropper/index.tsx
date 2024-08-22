@@ -1,15 +1,18 @@
-import { Row, Col, Card, Button, Flex } from "antd";
+import { Row, Col, Card, Button, Flex, Empty } from "antd";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import React, { useState, useRef } from "react";
 import Cropper, { type ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import UploadImage from "@/components/upload";
 import { downloadImgByUrl } from "@/utils/download";
+import readImage from "@/utils/readImage";
 const iamgeCropper: React.FC = () => {
   const [imgSrc, setSrc] = useState("");
   const cropperRef = useRef<ReactCropperElement>(null);
-  const handleMessage = (msg) => {
-    setSrc(msg); //接受子组件的图片消息
+  const handleMessage = async (msg) => {
+    console.log("msg", msg);
+    // setSrc(msg); //接受子组件的图片消息
+    setSrc(await readImage(msg.file.originFileObj));
   };
   const downloadImage = () => {
     const imgUrl = cropperRef.current?.cropper.getCroppedCanvas().toDataURL();
@@ -18,25 +21,29 @@ const iamgeCropper: React.FC = () => {
   return (
     <Row gutter={20}>
       <Col span={10}>
-        <Card title="裁剪区域" style={{ height: "55vh" }} hoverable={true}>
-          <Cropper
-            ref={cropperRef}
-            src={imgSrc}
-            initialAspectRatio={3 / 2}
-            guides={false}
-            autoCropArea={0.5}
-            autoCrop={true}
-            responsive={true}
-            preview=".img-preview"
-            style={{
-              height: "100%",
-              width: "100%",
-            }}
-          />
+        <Card title="裁剪区域" bodyStyle={{ height: "460px" }}>
+          {imgSrc == "" ? (
+            <Empty description="请先上传图片" />
+          ) : (
+            <Cropper
+              ref={cropperRef}
+              src={imgSrc}
+              initialAspectRatio={3 / 2}
+              guides={false}
+              autoCropArea={0.6}
+              autoCrop={true}
+              responsive={true}
+              preview=".img-preview"
+              style={{
+                height: "100%",
+                width: "100%",
+              }}
+            />
+          )}
         </Card>
       </Col>
       <Col span={4}>
-        <Card style={{ height: "55vh" }} title="设置区域" hoverable={true}>
+        <Card style={{ height: "516px" }} title="设置区域" hoverable={true}>
           <Flex
             align="center"
             justify="center"
@@ -62,20 +69,24 @@ const iamgeCropper: React.FC = () => {
       </Col>
       <Col span={10}>
         <Card
-          style={{ height: "55vh" }}
           bordered={false}
           title="预览区域"
           hoverable={true}
+          bodyStyle={{ height: "460px" }}
         >
-          <div
-            className="img-preview"
-            style={{
-              height: "38vh",
-              width: "100%",
-              overflow: "hidden",
-              margin: "0 auto",
-            }}
-          />
+          {imgSrc == "" ? (
+            <Empty description="请先上传图片" />
+          ) : (
+            <div
+              className="img-preview"
+              style={{
+                height: "460px",
+                width: "100%",
+                overflow: "hidden",
+                margin: "0 auto",
+              }}
+            />
+          )}
         </Card>
       </Col>
     </Row>

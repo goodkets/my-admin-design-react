@@ -1,9 +1,19 @@
-import { Row, Col, Card, Form, InputNumber, Space, Button, Select, message } from "antd";
+import {
+  Row,
+  Col,
+  Card,
+  Form,
+  InputNumber,
+  Space,
+  Button,
+  Select,
+  message,
+} from "antd";
 import React, { useState } from "react";
 import { COMPRESS_IMG_SRC } from "@/mockData/websiteSetting";
 import UploadImage from "@/components/upload";
 import SvgIcon from "@/components/svgIcon";
-import Compressor from 'compressorjs';
+import Compressor from "compressorjs";
 import readImage from "@/utils/readImage";
 import { downloadByUrl } from "@/utils/download";
 
@@ -50,10 +60,10 @@ const imageCompress: React.FC = () => {
     try {
       if (!info) return message.error("请先上传图片,示例图片无法压缩");
       new Compressor(info.file.originFileObj, {
-        quality: values.quality,//质量
-        width: values.width,//宽度
-        height: values.height,//高度
-        mimeType: values.mimeType,//图片格式
+        quality: values.quality, //质量
+        width: values.width, //宽度
+        height: values.height, //高度
+        mimeType: values.mimeType, //图片格式
         success: (result) => {
           setSrc(URL.createObjectURL(result));
           downloadByUrl({
@@ -76,7 +86,7 @@ const imageCompress: React.FC = () => {
     <Row gutter={20} justify={"center"}>
       <Col span={16}>
         <Card title="图片区域" hoverable={true}>
-          <div style={{ width: "100%", height: "63vh" }}>
+          <div style={{ width: "100%", height: "460px" }}>
             <img
               style={{
                 width: "100%",
@@ -94,7 +104,7 @@ const imageCompress: React.FC = () => {
             name="imageCompressForm"
             onFinish={onFinish}
             initialValues={defaultForm}
-            style={{ width: "300px", height: "57vh", margin: "60px auto 0" }}
+            style={{ width: "300px", height: "400px", margin: "60px auto 0" }}
           >
             <Form.Item label="图片上传" name={"img"}>
               <UploadImage onMessage={handleMessage} />
@@ -140,12 +150,18 @@ const imageCompress: React.FC = () => {
               label="图片质量"
               rules={[{ required: true, message: "请选择图片质量" }]}
             >
-              <Select >
+              <Select>
                 <Select.Option value={0}>0(压缩比:94.72％)</Select.Option>
                 <Select.Option value={0.2}>0.2(压缩比：83.90％)</Select.Option>
-                <Select.Option value={0.4}>0.4（压缩比：76.18％）</Select.Option>
-                <Select.Option value={0.6}>0.6（压缩比：67.99％--推荐）</Select.Option>
-                <Select.Option value={0.8}>0.8（压缩比：46.41％--推荐）</Select.Option>
+                <Select.Option value={0.4}>
+                  0.4（压缩比：76.18％）
+                </Select.Option>
+                <Select.Option value={0.6}>
+                  0.6（压缩比：67.99％--推荐）
+                </Select.Option>
+                <Select.Option value={0.8}>
+                  0.8（压缩比：46.41％--推荐）
+                </Select.Option>
                 <Select.Option value={1}>1（压缩比：0--不推荐）</Select.Option>
               </Select>
             </Form.Item>
@@ -154,7 +170,7 @@ const imageCompress: React.FC = () => {
               label="图片格式"
               rules={[{ required: true, message: "请选择图片格式" }]}
             >
-              <Select >
+              <Select>
                 <Select.Option value="image/png">PNG</Select.Option>
                 <Select.Option value="image/jpeg">JPG</Select.Option>
                 <Select.Option value="image/webp">BPM</Select.Option>

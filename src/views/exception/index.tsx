@@ -12,7 +12,7 @@ const subTitleMap = new Map([
 const PageException: FC = () => {
   const navigate = useNavigate();
   const backHome = () => {
-    navigate("/");
+    navigate("/home");
   };
   return (
     <Result

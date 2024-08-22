@@ -1,12 +1,5 @@
 import { Navigate } from "react-router-dom";
 import React from "react";
-import HomePage from "@/views/home/homePage";
-import BasignerPage from "@/views/form/basicPage";
-import DesigneerPage from "@/views/form/designerPage";
-import TabBasicPage from "@/views/table/basicPage";
-import TabDesignerPage from "@/views/table/designerPage";
-import ImageCropper from "@/views/image/image-cropper";
-import ImageCompress from "@/views/image/image-compress";
 import {
   PieChartOutlined,
   HomeOutlined,
@@ -14,6 +7,14 @@ import {
   FormOutlined,
   TableOutlined,
 } from "@ant-design/icons";
+import HomePage from "@/views/home/homePage";
+import BasignerPage from "@/views/form/basicPage";
+import DesigneerPage from "@/views/form/designerPage";
+import TabBasicPage from "@/views/table/basicPage";
+import TabDesignerPage from "@/views/table/designerPage";
+import ImageCropper from "@/views/image/image-cropper";
+import ImageCompress from "@/views/image/image-compress";
+import ImageComposition from "@/views/image/image-composition";
 
 const routes: Routes = [
   {
@@ -143,6 +144,15 @@ const routes: Routes = [
         meta: {
           title: "图片裁剪",
           permission: ["imageCropper"],
+        },
+      },
+      {
+        path: "/image/composition",
+        name: "图片合成",
+        element: <ImageComposition />,
+        meta: {
+          title: "图片合成",
+          permission: ["imageComposition"],
         },
       },
     ],
