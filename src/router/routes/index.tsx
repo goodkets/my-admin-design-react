@@ -36,7 +36,7 @@ const routes: Routes = [
     },
   },
   {
-    path: "*",
+    path: "",
     element: <Navigate to="/home" />,
     name: "",
     meta: {
