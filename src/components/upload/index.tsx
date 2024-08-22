@@ -27,27 +27,8 @@ const upload: React.FC = (props) => {
     } else {
       setalertStatus("error");
     }
-    readImage(info.file.originFileObj); // 图片转换为地址
-  };
-  const readImage = (image: any) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const data = e.target && (e.target.result as any);
-      // Convert Array Buffer to blob if it is base64
-      const result =
-        typeof data === "object"
-          ? window.URL.createObjectURL(new Blob([data]))
-          : data;
-      // onSuccess(result)
-      props.onMessage(result); // 图片上传成功-传递url
-    };
-    // Convert to base64
-    reader.readAsDataURL(image);
-    // Convert to blob
-    // reader.readAsArrayBuffer(image)
-    reader.onerror = () => {
-      message.error("图片读取出错!");
-    };
+    props.onMessage(info)
+    // readImage(info.file.originFileObj); // 图片转换为地址
   };
   return (
     <>

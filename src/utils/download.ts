@@ -3,6 +3,7 @@ import { base64toBlob, urlToBase64 } from "./image";
 
 /**
  * Download image by url
+ * 下载图片 URL：downloadImgByUrl('https://example.com/image.jpg', 'my-image.jpg');
  * @param url
  * @param filename
  * @param mineType
@@ -21,6 +22,8 @@ export function downloadImgByUrl(
 
 /**
  * Download image based on base64
+ * 下载 Base64 编码的图片：const base64String = 'data:image/jpeg;base64,...';
+downloadImgByBase64(base64String, 'my-image.jpg');
  * @param buf
  * @param filename
  * @param mineType
@@ -38,6 +41,8 @@ export function downloadImgByBase64(
 
 /**
  * Download by the back-end interface file stream
+ * 下载 Blob 数据：const blobData = new Blob(['some binary data'], { type: 'image/jpeg' });
+downloadByData(blobData, 'my-image.jpg');
  * @param {*} data
  * @param {*} filename
  * @param {*} mineType
@@ -70,6 +75,7 @@ export function downloadByData(
 
 /**
  * Download file by url
+ * 下载文件 URL：downloadByUrl({ url: 'https://example.com/file.pdf', fileName: 'my-file.pdf' });
  * @param {*} sUrl
  */
 export function downloadByUrl({
