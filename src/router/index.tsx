@@ -1,11 +1,11 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
+import { PieChartOutlined } from "@ant-design/icons";
 import React from "react";
+import { getItem } from "@/utils/storeages";
 import { LayoutGuard } from "./utils/guard";
 import UserLogin from "@/views/login/loginPage";
 import PermissionChecker from "./utils/permission";
-import { getItem } from "@/utils/storeages";
 import DashboardPage from "@/views/dashboard/dashboardPage";
-import { PieChartOutlined } from "@ant-design/icons";
 import PageException from "@/views/exception";
 
 const router = createBrowserRouter([

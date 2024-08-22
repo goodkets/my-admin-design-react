@@ -24,7 +24,13 @@ const AlertComponents: React.FC<{ messages: string; txt: string }> = ({
     };
   }, []);
 
-  return isVisible ? contextHolder : null;
+  // 优化返回值，确保只有在需要展示消息时才展示 contextHolder
+  return (
+    <React.Fragment>
+      {isVisible && contextHolder}
+      {/* 其他组件 */}
+    </React.Fragment>
+  );
 };
 
 export default AlertComponents;

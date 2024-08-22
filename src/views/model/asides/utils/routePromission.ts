@@ -41,9 +41,9 @@ const routePromissionMeta = (routes: RouteItem[]): MenuItem[] => {
     for (const element of routeList) {
       if (element.meta.permission && element.name) {
         let keyPath = element.path;
-        if (result.length == 0) {
-          keyPath = element.path.substring(1);
-        }
+        // if (result.length == 0) {
+        //   keyPath = element.path.substring(1);
+        // }
         if (element.children && element.children.length > 0) {
           const children = processRoutes(element.children, currentDepth + 1);
           result.push(

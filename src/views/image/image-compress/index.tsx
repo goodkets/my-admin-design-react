@@ -140,7 +140,7 @@ const imageCompress: React.FC = () => {
               label="图片质量"
               rules={[{ required: true, message: "请选择图片质量" }]}
             >
-              <Select defaultValue={0.6}>
+              <Select >
                 <Select.Option value={0}>0(压缩比:94.72％)</Select.Option>
                 <Select.Option value={0.2}>0.2(压缩比：83.90％)</Select.Option>
                 <Select.Option value={0.4}>0.4（压缩比：76.18％）</Select.Option>
@@ -154,7 +154,7 @@ const imageCompress: React.FC = () => {
               label="图片格式"
               rules={[{ required: true, message: "请选择图片格式" }]}
             >
-              <Select defaultValue="image/png">
+              <Select >
                 <Select.Option value="image/png">PNG</Select.Option>
                 <Select.Option value="image/jpeg">JPG</Select.Option>
                 <Select.Option value="image/webp">BPM</Select.Option>

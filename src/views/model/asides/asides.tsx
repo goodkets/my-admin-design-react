@@ -17,7 +17,7 @@ const SiderPage: React.FC = () => {
   const navigate = useNavigate();
   const { menuStatus } = useSelector((state) => state.settingSlice);
   const clickSide = (e: MenuInfo) => {
-    navigate(`/${e.key}`);
+    navigate(`${e.key}`);
   };
   return (
     <>
