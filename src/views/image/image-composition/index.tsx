@@ -1,6 +1,24 @@
-import { Row, Col, Card, Form, Button, Input, Select } from "antd";
-import React from "react";
+import {
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Input,
+  Select,
+  ColorPicker,
+  Space,
+  Dropdown,
+} from "antd";
+import type { ColorPickerProps, GetProp } from "antd";
+import { FontColorsOutlined } from "@ant-design/icons";
+import React, { useMemo, useState } from "react";
 import UploadImage from "@/components/upload";
+import { COMPRESS_IMG_SRC } from "@/mockData/websiteSetting";
+import domtoimage from "dom-to-image";
+import { downloadImgByUrl } from "@/utils/download";
+import SvgIcon from "@/components/svgIcon";
+import type { MenuProps } from "antd";
 interface FormState {
   width: number;
   height: number;
@@ -20,18 +38,80 @@ const defaultForm: FormState = {
   family: "Arial",
   size: "12",
 };
+const alignItems: MenuProps["items"] = [
+  {
+    key: "left",
+    label: "左对齐",
+  },
+  {
+    key: "center",
+    label: "居中",
+  },
+  {
+    key: "right",
+    label: "右对齐",
+  },
+];
+type Color = Extract<
+  GetProp<ColorPickerProps, "value">,
+  string | { cleared: any }
+>;
 const imageComposition: React.FC = () => {
+  const [imageInfo, setImageInfo] = useState(COMPRESS_IMG_SRC);
+  const [imgSrc, setSrc] = useState("");
+  const [color, setColor] = useState<Color>("#000");
+  const [color1, setColor1] = useState<Color>("#000");
+
+  const bgColor = useMemo<string>(
+    () => (typeof color === "string" ? color : color!.toHexString()),
+    [color],
+  );
+  const bgColor1 = useMemo<string>(
+    () => (typeof color1 === "string" ? color1 : color1!.toHexString()),
+    [color1],
+  );
+
+  const btnStyle: React.CSSProperties = {
+    color: bgColor,
+  };
+  const btnStyle1: React.CSSProperties = {
+    backgroundColor: bgColor1,
+    color: "#fff",
+  };
+  const onFinish = (values: FormState) => {
+    domtoimage
+      .toPng(document.querySelector(".imgChange") as HTMLElement)
+      .then(function (dataUrl) {
+        downloadImgByUrl(dataUrl, "test.png", "image/png"); //下载合成的图片
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+  };
   return (
     <div>
       <Row gutter={15} justify={"center"}>
         <Col span={16}>
-          <Card title="图片区域" bodyStyle={{ height: "520px" }}>
-            asd
+          <Card title="图片区域" bodyStyle={{ height: "660px" }}>
+            <div className="imgChange">
+              <img
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                src={imgSrc || imageInfo}
+              />
+            </div>
           </Card>
         </Col>
         <Col span={8}>
-          <Card title="组合区域" bodyStyle={{ height: "520px" }}>
-            <Form style={{ width: "300px" }} initialValues={defaultForm}>
+          <Card title="组合区域" bodyStyle={{ height: "660px" }}>
+            <Form
+              style={{ width: "300px", margin: "60px auto 0 " }}
+              initialValues={defaultForm}
+              onFinish={onFinish}
+            >
               <Form.Item name="bgImg" label="选择底图">
                 <UploadImage />
               </Form.Item>
@@ -104,6 +184,40 @@ const imageComposition: React.FC = () => {
                     48px
                   </Select.Option>
                 </Select>
+              </Form.Item>
+              <Form.Item label="样式操作">
+                <Space size={6}>
+                  <ColorPicker value={color} onChange={setColor}>
+                    <Button
+                      icon={<FontColorsOutlined />}
+                      style={btnStyle}
+                    ></Button>
+                  </ColorPicker>
+                  <ColorPicker value={color1} onChange={setColor1}>
+                    <Button
+                      icon={<FontColorsOutlined style={btnStyle1} />}
+                    ></Button>
+                  </ColorPicker>
+                  <Button
+                    icon={<SvgIcon name="font-bold" size={20} />}
+                    style={{ color: "#1890ff" }}
+                  />
+                  <Button
+                    icon={<SvgIcon name="font-italic" size={20} />}
+                    style={{ color: "#000" }}
+                  />
+                  <Button
+                    icon={<SvgIcon name="font-shadow" size={20} />}
+                    style={{ color: "#000" }}
+                  />
+                  <Dropdown
+                    menu={{ items: alignItems }}
+                    placement="bottomRight"
+                    trigger={["click"]}
+                  >
+                    <Button icon={<SvgIcon name="font-align" size={20} />} />
+                  </Dropdown>
+                </Space>
               </Form.Item>
               <Form.Item>
                 <Button

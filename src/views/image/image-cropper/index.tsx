@@ -16,6 +16,7 @@ const iamgeCropper: React.FC = () => {
   };
   const downloadImage = () => {
     const imgUrl = cropperRef.current?.cropper.getCroppedCanvas().toDataURL();
+    console.log("imgUrl", imgUrl);
     downloadImgByUrl(imgUrl, "download.png", "image/png");
   };
   return (

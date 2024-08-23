@@ -20,6 +20,7 @@
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
     "compressorjs": "^1.2.1",
+    "dom-to-image": "^2.6.0",
     "echarts": "^5.5.1",
     "eslint": "^8.57.0",
     "less": "^4.2.0",

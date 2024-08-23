@@ -27,7 +27,7 @@ const upload: React.FC = (props) => {
     } else {
       setalertStatus("error");
     }
-    props.onMessage(info)
+    props.onMessage(info);
     // readImage(info.file.originFileObj); // 图片转换为地址
   };
   return (
