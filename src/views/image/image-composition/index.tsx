@@ -9,6 +9,7 @@ import {
   ColorPicker,
   Space,
   Dropdown,
+  message,
 } from "antd";
 import type { ColorPickerProps, GetProp } from "antd";
 import { FontColorsOutlined } from "@ant-design/icons";
@@ -18,7 +19,8 @@ import { COMPRESS_IMG_SRC } from "@/mockData/websiteSetting";
 import domtoimage from "dom-to-image";
 import { downloadImgByUrl } from "@/utils/download";
 import SvgIcon from "@/components/svgIcon";
-import type { MenuProps } from "antd";
+import DraggableResizableBox from "@/components/DndNode";
+import { defaultForm, alignItems, fontOptions, sizeOptions } from "./data";
 interface FormState {
   width: number;
   height: number;
@@ -29,29 +31,6 @@ interface FormState {
   size: string;
 }
 
-const defaultForm: FormState = {
-  width: 1920,
-  height: 1080,
-  bgImg: "",
-  img: "",
-  text: "",
-  family: "Arial",
-  size: "12",
-};
-const alignItems: MenuProps["items"] = [
-  {
-    key: "left",
-    label: "左对齐",
-  },
-  {
-    key: "center",
-    label: "居中",
-  },
-  {
-    key: "right",
-    label: "右对齐",
-  },
-];
 type Color = Extract<
   GetProp<ColorPickerProps, "value">,
   string | { cleared: any }
@@ -61,7 +40,8 @@ const imageComposition: React.FC = () => {
   const [imgSrc, setSrc] = useState("");
   const [color, setColor] = useState<Color>("#000");
   const [color1, setColor1] = useState<Color>("#000");
-
+  const [ElementIndex, setElementIndex] = useState([]);
+  const [formData, setFormData] = useState({...defaultForm});
   const bgColor = useMemo<string>(
     () => (typeof color === "string" ? color : color!.toHexString()),
     [color],
@@ -78,6 +58,21 @@ const imageComposition: React.FC = () => {
     backgroundColor: bgColor1,
     color: "#fff",
   };
+  const addText = () => {
+    if (ElementIndex.length >= 5) {
+      message.error("最多添加5个元素");
+    }
+    setElementIndex([
+      ...ElementIndex,
+      ElementIndex[ElementIndex.length - 1] + 1,
+    ]);
+  };
+  const handChangeValue = (e) => {//获取文本内容--子传父
+    setFormData({...formData,text:e.innerText});
+  };
+  const changeText = (e) => {
+    setFormData({...formData,text:e.target.value});
+  }
   const onFinish = (values: FormState) => {
     domtoimage
       .toPng(document.querySelector(".imgChange") as HTMLElement)
@@ -93,15 +88,25 @@ const imageComposition: React.FC = () => {
       <Row gutter={15} justify={"center"}>
         <Col span={16}>
           <Card title="图片区域" bodyStyle={{ height: "660px" }}>
-            <div className="imgChange">
-              <img
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-                src={imgSrc || imageInfo}
-              />
+            <div
+              className="imgChange"
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundImage: `url(${imgSrc || imageInfo})`,
+              }}
+            >
+              {ElementIndex.map((item, index) => {
+                return (
+                  <DraggableResizableBox
+                    key={index}
+                    index={index}
+                    RndIndex={index}
+                    onChangeValue={handChangeValue}
+                    text = {formData.text}
+                  />
+                );
+              })}
             </div>
           </Card>
         </Col>
@@ -109,10 +114,13 @@ const imageComposition: React.FC = () => {
           <Card title="组合区域" bodyStyle={{ height: "660px" }}>
             <Form
               style={{ width: "300px", margin: "60px auto 0 " }}
-              initialValues={defaultForm}
+              initialValues={formData}
               onFinish={onFinish}
             >
               <Form.Item name="bgImg" label="选择底图">
+                <UploadImage />
+              </Form.Item>
+              <Form.Item style={{ width: "100%" }} label="添加图片" name="img">
                 <UploadImage />
               </Form.Item>
               <Form.Item
@@ -120,13 +128,9 @@ const imageComposition: React.FC = () => {
                 label="添加文本"
                 name="添加文本"
               >
-                <Button style={{ width: "100%" }}>添加文本</Button>
-              </Form.Item>
-              <Form.Item style={{ width: "100%" }} label="添加图片" name="img">
-                <UploadImage />
-              </Form.Item>
-              <Form.Item style={{ width: "100%" }} label="添加文本" name="text">
-                <Input placeholder="添加文本" />
+                <Button onClick={addText} style={{ width: "100%" }}>
+                  添加文本
+                </Button>
               </Form.Item>
               <Form.Item
                 style={{ width: "100%" }}
@@ -137,52 +141,39 @@ const imageComposition: React.FC = () => {
                   删除元素
                 </Button>
               </Form.Item>
+             {ElementIndex.length > 0 ? <div> <Form.Item
+                style={{ width: "100%" }}
+                label="文本编辑"
+                // name="text"
+              >
+                
+                  <Input value={formData.text} onChange={changeText} placeholder="请输入文本" />
+                
+              </Form.Item>
               <Form.Item
                 style={{ width: "100%" }}
                 label="字体选择"
                 name="family"
               >
                 <Select>
-                  <Select.Option value="Arial">黑体</Select.Option>
-                  <Select.Option value="Times New Roman">
-                    微软雅黑
-                  </Select.Option>
-                  <Select.Option value="Courier New">楷书</Select.Option>
-                  <Select.Option value="Verdana">隶书</Select.Option>
-                  <Select.Option value=" FangSong">宋体</Select.Option>
-                  <Select.Option value=" huawen">华文行楷</Select.Option>
-                  <Select.Option value=" FangSong">方正姚体</Select.Option>
+                  {fontOptions.map((option) => (
+                    <Select.Option key={option.value} value={option.value}>
+                      {option.label}
+                    </Select.Option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item style={{ width: "100%" }} label="字号选择" name="size">
                 <Select>
-                  <Select.Option value="12" style={{ fontSize: "12px" }}>
-                    12px
-                  </Select.Option>
-                  <Select.Option value="14" style={{ fontSize: "14px" }}>
-                    14px
-                  </Select.Option>
-                  <Select.Option value="16" style={{ fontSize: "16px" }}>
-                    16px
-                  </Select.Option>
-                  <Select.Option value="18" style={{ fontSize: "18px" }}>
-                    18px
-                  </Select.Option>
-                  <Select.Option value="20" style={{ fontSize: "20px" }}>
-                    20px
-                  </Select.Option>
-                  <Select.Option value="22" style={{ fontSize: "22px" }}>
-                    22px
-                  </Select.Option>
-                  <Select.Option value="24" style={{ fontSize: "24px" }}>
-                    24px
-                  </Select.Option>
-                  <Select.Option value="32" style={{ fontSize: "32px" }}>
-                    32px
-                  </Select.Option>
-                  <Select.Option value="48" style={{ fontSize: "48px" }}>
-                    48px
-                  </Select.Option>
+                  {sizeOptions.map((size) => (
+                    <Select.Option
+                      key={size}
+                      value={size}
+                      style={{ fontSize: `${size}px` }}
+                    >
+                      {`${size}px`}
+                    </Select.Option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item label="样式操作">
@@ -218,7 +209,7 @@ const imageComposition: React.FC = () => {
                     <Button icon={<SvgIcon name="font-align" size={20} />} />
                   </Dropdown>
                 </Space>
-              </Form.Item>
+              </Form.Item></div>:<></>}
               <Form.Item>
                 <Button
                   htmlType="submit"
