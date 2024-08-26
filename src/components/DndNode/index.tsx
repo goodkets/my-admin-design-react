@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Rnd as RndComponent, RndProps } from "react-rnd"; // 使用命名导入
 
 function DraggableResizableBox(props) {
-    console
+  console;
   const editRef = useRef(null);
   const [position, setPosition] = useState<RndProps>({
     x: 100,
@@ -41,11 +41,10 @@ function DraggableResizableBox(props) {
         style={{ ...styles }}
         onInput={handleContentChange}
       >
-      {props.text}
+        {props.text}
       </div>
     </RndComponent>
   );
 }
-
 
 export default DraggableResizableBox;

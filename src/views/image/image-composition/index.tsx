@@ -41,7 +41,7 @@ const imageComposition: React.FC = () => {
   const [color, setColor] = useState<Color>("#000");
   const [color1, setColor1] = useState<Color>("#000");
   const [ElementIndex, setElementIndex] = useState([]);
-  const [formData, setFormData] = useState({...defaultForm});
+  const [formData, setFormData] = useState({ ...defaultForm });
   const bgColor = useMemo<string>(
     () => (typeof color === "string" ? color : color!.toHexString()),
     [color],
@@ -67,12 +67,13 @@ const imageComposition: React.FC = () => {
       ElementIndex[ElementIndex.length - 1] + 1,
     ]);
   };
-  const handChangeValue = (e) => {//获取文本内容--子传父
-    setFormData({...formData,text:e.innerText});
+  const handChangeValue = (e) => {
+    //获取文本内容--子传父
+    setFormData({ ...formData, text: e.innerText });
   };
   const changeText = (e) => {
-    setFormData({...formData,text:e.target.value});
-  }
+    setFormData({ ...formData, text: e.target.value });
+  };
   const onFinish = (values: FormState) => {
     domtoimage
       .toPng(document.querySelector(".imgChange") as HTMLElement)
@@ -103,7 +104,7 @@ const imageComposition: React.FC = () => {
                     index={index}
                     RndIndex={index}
                     onChangeValue={handChangeValue}
-                    text = {formData.text}
+                    text={formData.text}
                   />
                 );
               })}
@@ -141,75 +142,90 @@ const imageComposition: React.FC = () => {
                   删除元素
                 </Button>
               </Form.Item>
-             {ElementIndex.length > 0 ? <div> <Form.Item
-                style={{ width: "100%" }}
-                label="文本编辑"
-                // name="text"
-              >
-                
-                  <Input value={formData.text} onChange={changeText} placeholder="请输入文本" />
-                
-              </Form.Item>
-              <Form.Item
-                style={{ width: "100%" }}
-                label="字体选择"
-                name="family"
-              >
-                <Select>
-                  {fontOptions.map((option) => (
-                    <Select.Option key={option.value} value={option.value}>
-                      {option.label}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-              <Form.Item style={{ width: "100%" }} label="字号选择" name="size">
-                <Select>
-                  {sizeOptions.map((size) => (
-                    <Select.Option
-                      key={size}
-                      value={size}
-                      style={{ fontSize: `${size}px` }}
-                    >
-                      {`${size}px`}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-              <Form.Item label="样式操作">
-                <Space size={6}>
-                  <ColorPicker value={color} onChange={setColor}>
-                    <Button
-                      icon={<FontColorsOutlined />}
-                      style={btnStyle}
-                    ></Button>
-                  </ColorPicker>
-                  <ColorPicker value={color1} onChange={setColor1}>
-                    <Button
-                      icon={<FontColorsOutlined style={btnStyle1} />}
-                    ></Button>
-                  </ColorPicker>
-                  <Button
-                    icon={<SvgIcon name="font-bold" size={20} />}
-                    style={{ color: "#1890ff" }}
-                  />
-                  <Button
-                    icon={<SvgIcon name="font-italic" size={20} />}
-                    style={{ color: "#000" }}
-                  />
-                  <Button
-                    icon={<SvgIcon name="font-shadow" size={20} />}
-                    style={{ color: "#000" }}
-                  />
-                  <Dropdown
-                    menu={{ items: alignItems }}
-                    placement="bottomRight"
-                    trigger={["click"]}
+              {ElementIndex.length > 0 ? (
+                <div>
+                  {" "}
+                  <Form.Item
+                    style={{ width: "100%" }}
+                    label="文本编辑"
+                    // name="text"
                   >
-                    <Button icon={<SvgIcon name="font-align" size={20} />} />
-                  </Dropdown>
-                </Space>
-              </Form.Item></div>:<></>}
+                    <Input
+                      value={formData.text}
+                      onChange={changeText}
+                      placeholder="请输入文本"
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    style={{ width: "100%" }}
+                    label="字体选择"
+                    name="family"
+                  >
+                    <Select>
+                      {fontOptions.map((option) => (
+                        <Select.Option key={option.value} value={option.value}>
+                          {option.label}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    style={{ width: "100%" }}
+                    label="字号选择"
+                    name="size"
+                  >
+                    <Select>
+                      {sizeOptions.map((size) => (
+                        <Select.Option
+                          key={size}
+                          value={size}
+                          style={{ fontSize: `${size}px` }}
+                        >
+                          {`${size}px`}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                  <Form.Item label="样式操作">
+                    <Space size={6}>
+                      <ColorPicker value={color} onChange={setColor}>
+                        <Button
+                          icon={<FontColorsOutlined />}
+                          style={btnStyle}
+                        ></Button>
+                      </ColorPicker>
+                      <ColorPicker value={color1} onChange={setColor1}>
+                        <Button
+                          icon={<FontColorsOutlined style={btnStyle1} />}
+                        ></Button>
+                      </ColorPicker>
+                      <Button
+                        icon={<SvgIcon name="font-bold" size={20} />}
+                        style={{ color: "#1890ff" }}
+                      />
+                      <Button
+                        icon={<SvgIcon name="font-italic" size={20} />}
+                        style={{ color: "#000" }}
+                      />
+                      <Button
+                        icon={<SvgIcon name="font-shadow" size={20} />}
+                        style={{ color: "#000" }}
+                      />
+                      <Dropdown
+                        menu={{ items: alignItems }}
+                        placement="bottomRight"
+                        trigger={["click"]}
+                      >
+                        <Button
+                          icon={<SvgIcon name="font-align" size={20} />}
+                        />
+                      </Dropdown>
+                    </Space>
+                  </Form.Item>
+                </div>
+              ) : (
+                <></>
+              )}
               <Form.Item>
                 <Button
                   htmlType="submit"
