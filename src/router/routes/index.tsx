@@ -15,6 +15,7 @@ import TabDesignerPage from "@/views/table/designerPage";
 import ImageCropper from "@/views/image/image-cropper";
 import ImageCompress from "@/views/image/image-compress";
 import ImageComposition from "@/views/image/image-composition";
+import MapComponent from "@/views/map";
 
 const routes: Routes = [
   {
@@ -156,6 +157,16 @@ const routes: Routes = [
         },
       },
     ],
+  },
+  {
+    path: "map",
+    name: "地图",
+    element: <MapComponent />,
+    meta: {
+      title: "地图",
+      icon: <ContainerOutlined />,
+      permission: ["map"],
+    },
   },
 ];
 export default routes;

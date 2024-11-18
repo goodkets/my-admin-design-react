@@ -12,6 +12,7 @@
     "lint:lint-staged": "lint-staged"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@ant-design/charts": "^2.1.2",
     "@ant-design/plots": "^2.2.8",
     "@jiaminghi/data-view-react": "^1.2.5",
