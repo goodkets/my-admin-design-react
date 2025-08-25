@@ -15,16 +15,11 @@ import TabDesignerPage from "@/views/projectMasage/designerPage";
 import ImageCropper from "@/views/image/image-cropper";
 import ImageCompress from "@/views/image/image-compress";
 import ImageComposition from "@/views/image/image-composition";
-<<<<<<< HEAD
 import UserPage from "@/views/permission/userMassage";
 import ProjectPage from "@/views/permission/projectMassage";
 import GroupMassage from "@/views/permission/groupMassage";
 import FileManagement from "@/views/permission/FileManagement";
 import HomePage from "@/views/home/homePage";
-
-=======
-import MapComponent from "@/views/map";
->>>>>>> 0c703355b73cd3e7aad5e478d91f89e4bec56ce8
 
 const routes: Routes = [
   {
@@ -161,7 +156,6 @@ const routes: Routes = [
       },
     ]
   },
-<<<<<<< HEAD
   // {
   //   name: "档案管理",
   //   path: "/fileList",
@@ -172,17 +166,5 @@ const routes: Routes = [
   //     permission: ["permissionFile"],
   //   },
   // }
-=======
-  {
-    path: "map",
-    name: "地图",
-    element: <MapComponent />,
-    meta: {
-      title: "地图",
-      icon: <ContainerOutlined />,
-      permission: ["map"],
-    },
-  },
->>>>>>> 0c703355b73cd3e7aad5e478d91f89e4bec56ce8
 ];
 export default routes;

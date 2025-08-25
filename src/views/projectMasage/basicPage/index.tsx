@@ -222,17 +222,17 @@ const TabBasicPage: React.FC = (props) => {
             </Tag>
           ),
         },
-        {
-          title: "职务",
-          dataIndex: "motelName",
-          key: "motelName",
-          width: 120,
-          render: (motelName: string) => (
-            <Tag color="purple" style={{ borderRadius: '6px' }}>
-              {motelName}
-            </Tag>
-          ),
-        },
+        // {
+        //   title: "职务",
+        //   dataIndex: "motelName",
+        //   key: "motelName",
+        //   width: 120,
+        //   render: (motelName: string) => (
+        //     <Tag color="purple" style={{ borderRadius: '6px' }}>
+        //       {motelName}
+        //     </Tag>
+        //   ),
+        // },
         {
           title: "地区",
           dataIndex: "region",
@@ -681,7 +681,7 @@ const TabBasicPage: React.FC = (props) => {
           </Form.Item>
 
           <Row gutter={16}>
-            <Col span={12}>
+            {/* <Col span={12}>
               <Form.Item
                 name="motelName"
                 label="职务"
@@ -689,7 +689,7 @@ const TabBasicPage: React.FC = (props) => {
               >
                 <Input placeholder="请输入职务" />
               </Form.Item>
-            </Col>
+            </Col> */}
             <Col span={12}>
               <Form.Item
                 name="region"
