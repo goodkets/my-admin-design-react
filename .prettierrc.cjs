@@ -7,4 +7,5 @@ module.exports = {
     semi: true,
     singleQuote: false,
     quoteProps: "preserve",
+    endOfLine: "auto"
 }

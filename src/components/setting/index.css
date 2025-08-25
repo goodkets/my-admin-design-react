@@ -6,6 +6,46 @@
   align-items: center;
   justify-content: space-between;
 }
+.settings-left {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+.settings-left :global .ant-tabs .ant-tabs-nav {
+  margin: 0;
+}
+.settings-left :global .ant-tabs .ant-tabs-nav .ant-tabs-tab-active {
+  background-color: #eeeeee !important;
+  border-color: #d9d9d9 !important;
+}
+.settings-left :global .ant-tabs .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #262626 !important;
+  font-weight: 500;
+}
+.settings-left :global .ant-tabs .ant-tabs-nav .ant-tabs-tab {
+  padding: 6px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px 4px 0 0;
+  background: #fafafa;
+  margin-right: 2px;
+}
+.settings-left :global .ant-tabs .ant-tabs-nav .ant-tabs-tab:hover {
+  background-color: #f0f0f0;
+}
+.settings-left :global .ant-tabs .ant-tabs-nav .ant-tabs-tab:hover .ant-tabs-tab-btn {
+  color: #1890ff;
+}
+.settings-left :global .ant-tabs .ant-tabs-ink-bar {
+  display: none;
+}
+.settings-left :global .ant-tabs.ant-tabs-card .ant-tabs-nav::before {
+  border-bottom: 1px solid #d9d9d9;
+}
+.settings-left :global .ant-tabs.ant-tabs-card .ant-tabs-nav .ant-tabs-tab {
+  border-bottom: none;
+}
+.settings-left :global .ant-tabs.ant-tabs-card .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  border-bottom-color: #fff !important;
+}
 .settings-right {
   margin-right: 30px;
 }

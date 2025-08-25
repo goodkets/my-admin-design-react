@@ -1,20 +1,26 @@
-import { Navigate } from "react-router-dom";
-import React from "react";
+import React, { Children } from "react";
 import {
   PieChartOutlined,
   HomeOutlined,
   ContainerOutlined,
   FormOutlined,
   TableOutlined,
+  UserOutlined,
+  ProjectOutlined
 } from "@ant-design/icons";
-import HomePage from "@/views/home/homePage";
 import BasignerPage from "@/views/form/basicPage";
 import DesigneerPage from "@/views/form/designerPage";
-import TabBasicPage from "@/views/table/basicPage";
-import TabDesignerPage from "@/views/table/designerPage";
+import TabBasicPage from "@/views/projectMasage/basicPage";
+import TabDesignerPage from "@/views/projectMasage/designerPage";
 import ImageCropper from "@/views/image/image-cropper";
 import ImageCompress from "@/views/image/image-compress";
 import ImageComposition from "@/views/image/image-composition";
+import UserPage from "@/views/permission/userMassage";
+import ProjectPage from "@/views/permission/projectMassage";
+import GroupMassage from "@/views/permission/groupMassage";
+import FileManagement from "@/views/permission/FileManagement";
+import HomePage from "@/views/home/homePage";
+
 
 const routes: Routes = [
   {
@@ -27,6 +33,7 @@ const routes: Routes = [
       permission: ["home"],
     },
   },
+
   {
     path: "dashboard",
     name: "数据大屏",
@@ -36,61 +43,51 @@ const routes: Routes = [
       permission: ["dashboard"],
     },
   },
-  {
-    path: "",
-    element: <Navigate to="/home" />,
-    name: "",
-    meta: {
-      title: "首页",
-      icon: <HomeOutlined />,
-      permission: ["home"],
-    },
-  },
-  {
-    path: "form",
-    name: "表单",
-    meta: {
-      title: "表单",
-      icon: <FormOutlined />,
-      permission: ["form"],
-    },
-    children: [
-      {
-        path: "/form/basic",
-        name: "基础表单",
-        meta: {
-          title: "基础表单",
-          icon: <FormOutlined />,
-          permission: ["formBas"],
-        },
-        children: [
-          {
-            path: "/form/basic/basic",
-            name: "操作表单",
-            element: <BasignerPage />,
-            meta: {
-              title: "基础表单1",
-              icon: <FormOutlined />,
-              permission: ["formBas"],
-            },
-          },
-        ],
-      },
-      {
-        path: "/form/designer",
-        name: "高级表单",
-        element: <DesigneerPage />,
-        meta: {
-          title: "高级表单",
-          icon: <FormOutlined />,
-          permission: ["formDes"],
-        },
-      },
-    ],
-  },
+  // {
+  //   path: "form",
+  //   name: "表单",
+  //   meta: {
+  //     title: "表单",
+  //     icon: <FormOutlined />,
+  //     permission: ["form"],
+  //   },
+  //   children: [
+  //     {
+  //       path: "/form/basic",
+  //       name: "基础表单",
+  //       meta: {
+  //         title: "基础表单",
+  //         icon: <FormOutlined />,
+  //         permission: ["formBas"],
+  //       },
+  //       children: [
+  //         {
+  //           path: "/form/basic/basic",
+  //           name: "操作表单",
+  //           element: <BasignerPage />,
+  //           meta: {
+  //             title: "基础表单1",
+  //             icon: <FormOutlined />,
+  //             permission: ["formBas"],
+  //           },
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       path: "/form/designer",
+  //       name: "高级表单",
+  //       element: <DesigneerPage />,
+  //       meta: {
+  //         title: "高级表单",
+  //         icon: <FormOutlined />,
+  //         permission: ["formDes"],
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: "table",
-    name: "表格",
+    name: "项目管理",
     meta: {
       title: "表格",
       icon: <ContainerOutlined />,
@@ -99,20 +96,20 @@ const routes: Routes = [
     children: [
       {
         path: "/table/basic",
-        name: "基础表格",
+        name: "智慧养老平台",
         element: <TabBasicPage />,
         meta: {
-          title: "基础表格",
+          title: "智慧养老平台",
           icon: <TableOutlined />,
           permission: ["tableBas"],
         },
       },
       {
         path: "/table/designer",
-        name: "高级表格",
+        name: "社区健康服务系统",
         element: <TabDesignerPage />,
         meta: {
-          title: "高级表格",
+          title: "智慧养老平台",
           icon: <TableOutlined />,
           permission: ["tableDes"],
         },
@@ -120,42 +117,55 @@ const routes: Routes = [
     ],
   },
   {
-    path: "image",
-    name: "图片功能",
+    path:'permission',
+    name: "权限管理",
     meta: {
-      title: "图片功能",
+      title: "权限管理",
       icon: <ContainerOutlined />,
-      permission: ["image"],
+      permission: ["permission"],
     },
     children: [
       {
-        path: "/image/compress",
-        name: "图片压缩",
-        element: <ImageCompress />,
+        path: "/permission/user",
+        name: '用户管理',
+        element: <UserPage />,
         meta: {
-          title: "图片压缩",
-          permission: ["imageCompress"],
+          title: "用户管理",
+          icon: <UserOutlined />,
+          permission: ["permissionBas"],
         },
       },
       {
-        path: "/image/cropper",
-        name: "图片裁剪",
-        element: <ImageCropper />,
+        name:'项目管理',
+        path: "/permission/project",
+        element: <ProjectPage />,
         meta: {
-          title: "图片裁剪",
-          permission: ["imageCropper"],
+          title: "项目管理",
+          icon: <ProjectOutlined />,
+          permission: ["permissionBas"],
         },
       },
       {
-        path: "/image/composition",
-        name: "图片合成",
-        element: <ImageComposition />,
+        name: "组管理",
+        path: "/permission/group",
+        element: <GroupMassage />,
         meta: {
-          title: "图片合成",
-          permission: ["imageComposition"],
+          title: "组管理",
+          icon: <ProjectOutlined />,
+          permission: ["permissionDes"],
         },
       },
-    ],
+    ]
   },
+  // {
+  //   name: "档案管理",
+  //   path: "/fileList",
+  //   element: <FileManagement />,
+  //   meta: {
+  //     title: "档案管理",
+  //     icon: <ProjectOutlined />,
+  //     permission: ["permissionFile"],
+  //   },
+  // }
 ];
 export default routes;

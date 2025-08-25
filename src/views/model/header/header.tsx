@@ -12,6 +12,10 @@ import {
   LockFilled,
   SettingOutlined,
   HomeOutlined,
+  SkinOutlined,
+  QuestionCircleOutlined,
+  BellOutlined
+
 } from "@ant-design/icons";
 import "./index.less";
 import { useDispatch } from "react-redux";
@@ -121,25 +125,7 @@ const HeaderPage: React.FC = () => {
       icon: <PoweroffOutlined />,
     },
   ];
-  // 定义面包屑导航的项
-  const breadcrumbItems = [
-    {
-      title: (
-        <>
-          <HomeOutlined />
-          <span>首页</span>
-        </>
-      ),
-    },
-    {
-      title: (
-        <>
-          <SettingOutlined />
-          <span>表格</span>
-        </>
-      ),
-    },
-  ];
+
   return (
     <>
       <Header
@@ -155,12 +141,24 @@ const HeaderPage: React.FC = () => {
             >
               {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </div>
-            <div className="crumb">
-              <Breadcrumb items={breadcrumbItems} separator=">" />
-            </div>
           </div>
           <div className="header-right">
             <div className="setting">
+            <span className="setting-item">
+                <Tooltip title={"换肤"}>
+                    <SkinOutlined />
+                </Tooltip>
+              </span>
+            <span className="setting-item" >
+                <Tooltip title={"通知"}>
+                <BellOutlined />
+                </Tooltip>
+              </span>
+              <span className="setting-item">
+                <Tooltip title={ "使用手册"}>
+                <QuestionCircleOutlined />
+                </Tooltip>
+              </span>
               <span className="setting-item" onClick={toggleFullScreen}>
                 <Tooltip title={isFullScreen ? "退出全屏" : "全屏"}>
                   {isFullScreen ? (
@@ -170,7 +168,7 @@ const HeaderPage: React.FC = () => {
                   )}
                 </Tooltip>
               </span>
-              <Tooltip className="setting-item" title="csdn">
+              {/* <Tooltip className="setting-item" title="csdn">
                 <FileTextOutlined
                   onClick={() => {
                     window.open("https://blog.csdn.net/qq_47040462?type=blog");
@@ -185,7 +183,7 @@ const HeaderPage: React.FC = () => {
                     );
                   }}
                 />
-              </Tooltip>
+              </Tooltip> */}
             </div>
             <span className="split">|</span>
             <div className="avatar">

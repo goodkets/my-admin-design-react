@@ -8,7 +8,9 @@ function createUserList() {
             token: 'Admin Token',
             permission: [{ name: 'home'},{ name: 'dashboard'},{ name: 'form', children: ['formBas', 'formDes']},{ name: 'table', children: ['tableBas', 'tableDes']},{
                 name: 'image',children:['imageCropper','imageCompress','imageComposition']
-            }],
+            },{
+                name:'permission', children:['permissionBas','permissionDes']
+            },{name:'permissionFile'}],
         },
         {
             userId: 2,

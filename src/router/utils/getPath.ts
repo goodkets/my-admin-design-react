@@ -6,7 +6,7 @@ const getPath = (routes) => {
       if (route.children && route.children.length > 0) {
         resultList.push(...pathArrays(route.children));
       } else {
-        resultList.push(route.path);
+        resultList.push({path:route.path, name: route.name, permission: route.meta?.permission || []});
       }
     });
     return resultList;
